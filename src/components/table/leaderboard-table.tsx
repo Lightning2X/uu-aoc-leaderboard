@@ -13,6 +13,7 @@ import React from "react";
 import {
   APIData,
   Column,
+  HasStars,
   PreProcessData,
   Row,
   ScoreEntry,
@@ -20,8 +21,19 @@ import {
 } from "./leaderboard-table.types";
 const columns: readonly Column[] = [
   { id: "user", label: "Name", minWidth: 170 },
-  { id: "totalTime", label: "Star1", minWidth: 100 },
-  { id: "stars", label: "Star2", minWidth: 100 },
+  { id: "totalTime", label: "Total time", minWidth: 100 },
+  {
+    id: "stars",
+    label: "Stars",
+    minWidth: 100,
+    format: (value: unknown) => {
+      return _.reduce(
+        value as HasStars[],
+        (sum, x) => [x.one, x.two].filter(Boolean).length + sum,
+        0
+      ).toString();
+    },
+  },
   { id: "score", label: "Score", minWidth: 100 },
 ];
 
@@ -117,9 +129,7 @@ function LeaderBoardTable() {
               const value = row[column.id];
               return (
                 <TableCell key={column.id} align={column.align}>
-                  {column.format && typeof value === "number"
-                    ? column.format(value)
-                    : value}
+                  {column.format ? column.format(value) : value}
                 </TableCell>
               );
             })}
@@ -133,17 +143,22 @@ function LeaderBoardTable() {
     var grouped = _.mapValues(_.groupBy(data, "username"), (list) =>
       list.map((user) => _.omit(user, "username"))
     );
-    const scores = calculateScores(data);
-    var rowData = [];
+    const scoreMap = calculateScores(data);
+    var rowData = [] as Row[];
     Object.entries(grouped).forEach((userEntry) => {
-      // const stars = userEntry[1].map((x) => {
-      //   return { one: x.starOne, two: x.starTwo };
-      // });
-      // const row: Row = {
-      //   user: userEntry[0],
-      //   stars: stars,
-      // };
+      const stars = userEntry[1].map((x) => {
+        return { one: !!x.starOne, two: !!x.starTwo } as HasStars;
+      });
+      const row: Row = {
+        user: userEntry[0],
+        stars: stars,
+        score: scoreMap.get(userEntry[0])?.score,
+        totalTime: scoreMap.get(userEntry[0])?.timeTakenMs,
+      };
+      rowData.push(row);
     });
+
+    return rowData;
   };
 
   const getPreProcessedData = (data: APIData[]) => {
@@ -213,10 +228,9 @@ function LeaderBoardTable() {
               ))}
             </TableRow>
           </TableHead>
-          <TableBody>{getRowsJSX([])}</TableBody>
+          <TableBody>{getRowsJSX(mapData(fakeData))}</TableBody>
         </Table>
       </TableContainer>
-      {mapData(fakeData)}
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"

@@ -3,20 +3,20 @@ export interface Column {
   label: string;
   minWidth?: number;
   align?: "right";
-  format?: (value: number) => string;
+  format?: (value: unknown) => string;
 }
 
 
 export interface Row {
   user: string;
-  totalTime: string;
-  stars: Star[];
-  score: string;
+  stars: HasStars[];
+  totalTime: number;
+  score: number;
 } 
 
-export interface Star {
-  one: string;
-  two: string;
+export interface HasStars {
+  one: boolean;
+  two: boolean;
 }
 
 export interface APIData {
