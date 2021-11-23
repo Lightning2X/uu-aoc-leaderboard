@@ -1,6 +1,6 @@
 import {
   colors,
-  createMuiTheme,
+  createTheme,
   CssBaseline,
   responsiveFontSizes,
   ThemeProvider,
@@ -9,11 +9,11 @@ import "fontsource-roboto";
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.scss";
-import NavBar from "./components/navBar";
+import NavBar from "./components/navBar/navBar";
 import MainPage from "./mainPage/mainPage";
 
 // Create a theme instance.
-let theme = createMuiTheme({
+let theme = createTheme({
   palette: {
     primary: {
       main: "#fd7014",

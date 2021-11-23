@@ -1,9 +1,8 @@
 import { AppBar, Box, IconButton, Toolbar } from "@material-ui/core";
 import { AlternateEmail, Chat, Home } from "@material-ui/icons";
 import React from "react";
-import { MainPageProps } from "../mainPage/mainPage.types";
 
-function NavBar(props: MainPageProps) {
+function NavBar() {
   return (
     <AppBar position="static">
       <Toolbar>
