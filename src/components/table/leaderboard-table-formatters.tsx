@@ -6,7 +6,7 @@ import styles from "./table.module.scss";
 
 export const starTableFormatter = (value: unknown) => {
   var starDataArray = value as StarData[];
-  const lastDay = 31;
+  const lastDay = 25;
 
   console.log(starDataArray.filter((x) => x.two).length);
   return (
