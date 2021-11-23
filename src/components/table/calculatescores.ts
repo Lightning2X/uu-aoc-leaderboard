@@ -4,8 +4,11 @@ import { PreProcessData, ScoreData, ScoreDataUserName } from "./leaderboard-tabl
 export const calculateScores = (data: PreProcessData[]) => {
     console.log("data", data)
   var result = new Map<string, ScoreData>();
+  // Sort on time taken to find the top scoring users
   var daysOne = _.sortBy(_.groupBy(data, "day"), ["timeTakenMsOne"], ["asc"]);
   var daysTwo = _.sortBy(_.groupBy(data, "day"), ["timeTakenMsTwo"], ["asc"]);
+
+  // Map to scores per day per star one
   var scoresPerDayOne = daysOne.map((day) =>
     day.map((x, ind) => {
       return {
@@ -18,6 +21,7 @@ export const calculateScores = (data: PreProcessData[]) => {
     })
   );
 
+  // Map to scores per day per star two
   var scoresPerDayTwo = daysTwo.map((day) =>
     day.map((x, ind) => {
       return {
@@ -25,14 +29,13 @@ export const calculateScores = (data: PreProcessData[]) => {
         timeTakenMsOne: null,
         timeTakenMsTwo: x.timeTakenMsTwo,
         username: x.username,
+        // If star two hasnt been solved, the total time is star one
         totalTimeTakenMs: x.starTwo ? x.timeTakenMsTwo : x.timeTakenMsOne,
       } as ScoreDataUserName;
     })
   );
 
-  console.log("scoresPerDayOne", scoresPerDayOne)
-  console.log("scoresPerDayTwo", scoresPerDayTwo);
-
+  // Map the first results (of star one) into the result Dictionary
   scoresPerDayOne.forEach((day) =>
     day.forEach((x) => {
       var entry =
@@ -47,8 +50,7 @@ export const calculateScores = (data: PreProcessData[]) => {
     })
   );
 
-  console.log("result after 1", result)
-
+  // Map the second results (of star two) into the result Dictionary
   scoresPerDayTwo.forEach((day) =>
     day.forEach((x) => {
       var { score, timeTakenMsOne, timeTakenMsTwo, totalTimeTakenMs } = result.get(x.username);
@@ -59,9 +61,7 @@ export const calculateScores = (data: PreProcessData[]) => {
         totalTimeTakenMs: totalTimeTakenMs + x.totalTimeTakenMs,
       });
     })
-  );
-
-  console.log("final", result)
+  ); 
 
   return result;
 };

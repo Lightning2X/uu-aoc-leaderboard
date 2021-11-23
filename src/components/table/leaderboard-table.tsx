@@ -161,23 +161,26 @@ function LeaderBoardTable() {
   };
 
   const getPreProcessedData = (data: APIData[]) => {
-    return data
-      .filter((x) => x.starOne && x.startTime)
-      .map((x) => {
-        const startTime = new Date(x.startTime);
-        const starOne = new Date(x.starOne);
-        const starTwo = x.starTwo ? new Date(x.starTwo) : null;
-        return {
-          day: x.day,
-          year: x.year,
-          username: x.username,
-          starOne,
-          starTwo,
-          startTime,
-          timeTakenMsOne: getTimeTaken(startTime, starOne),
-          timeTakenMsTwo: getTimeTaken(startTime, starTwo),
-        } as PreProcessData;
-      });
+    return (
+      data
+        // We do not care for anything that will not result in a score
+        .filter((x) => x.starOne && x.startTime)
+        .map((x) => {
+          const startTime = new Date(x.startTime);
+          const starOne = new Date(x.starOne);
+          const starTwo = x.starTwo ? new Date(x.starTwo) : null;
+          return {
+            day: x.day,
+            year: x.year,
+            username: x.username,
+            starOne,
+            starTwo,
+            startTime,
+            timeTakenMsOne: getTimeTaken(startTime, starOne),
+            timeTakenMsTwo: getTimeTaken(startTime, starTwo),
+          } as PreProcessData;
+        })
+    );
   };
 
   const getTimeTaken = (startTime: Date, star: Date) => {
