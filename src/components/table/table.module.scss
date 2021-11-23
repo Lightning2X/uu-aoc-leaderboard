@@ -1,0 +1,36 @@
+@import "../../shared/variables.scss";
+
+.theme-paper {
+    color: $theme-text;
+    background-color: $theme-secondary !important;
+    width: 100%;
+    overflow: hidden;
+}
+
+.theme-table-header-row { 
+    color: $theme-text;
+    background-color: $theme-background;
+}
+
+.theme-table-header-cell { 
+    color: inherit !important;
+    background-color: inherit !important;
+    border-bottom-color: $theme-primary !important;
+}
+
+.theme-table-body {
+    color: $theme-text;
+    background-color: $theme-primary;
+}
+.theme-table-row {
+     color: $theme-text;
+     background-color: $theme-secondary;
+}
+
+.theme-table-cell { 
+    color: inherit !important;
+    background-color: inherit !important;
+    border-bottom-color: $theme-primary !important;
+}
+
+   

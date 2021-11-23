@@ -18,6 +18,8 @@ import {
   PreProcessData,
   Row,
 } from "./leaderboard-table.types";
+import styles from "./table.module.scss";
+
 const columns: readonly Column[] = [
   { id: "user", label: "Name", minWidth: 170 },
   { id: "totalTime", label: "Total time", minWidth: 100 },
@@ -123,11 +125,22 @@ function LeaderBoardTable() {
       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
       .map((row) => {
         return (
-          <TableRow hover role="checkbox" tabIndex={-1} key={row.user}>
+          <TableRow
+            className={styles["theme-table-row"]}
+            hover
+            role="checkbox"
+            tabIndex={-1}
+            key={row.user}
+          >
             {columns.map((column) => {
               const value = row[column.id];
               return (
-                <TableCell key={column.id} align={column.align}>
+                <TableCell
+                  className={styles["theme-table-cell"]}
+                  key={column.id}
+                  align={column.align}
+                  style={{ backgroundColor: "#393e46" }}
+                >
                   {column.format ? column.format(value) : value}
                 </TableCell>
               );
@@ -191,13 +204,14 @@ function LeaderBoardTable() {
   };
 
   return (
-    <Paper style={{ width: "100%", overflow: "hidden" }}>
+    <Paper className={styles["theme-paper"]}>
       <TableContainer style={{ maxHeight: "100%" }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
-            <TableRow>
+            <TableRow className={styles["theme-table-header-row"]}>
               {columns.map((column) => (
                 <TableCell
+                  className={styles["theme-table-header-cell"]}
                   key={column.id}
                   align={column.align}
                   style={{ minWidth: column.minWidth }}
@@ -207,7 +221,9 @@ function LeaderBoardTable() {
               ))}
             </TableRow>
           </TableHead>
-          <TableBody>{getRowsJSX(mapData(fakeData))}</TableBody>
+          <TableBody className={styles["theme-table-body"]}>
+            {getRowsJSX(mapData(fakeData))}
+          </TableBody>
         </Table>
       </TableContainer>
       <TablePagination
