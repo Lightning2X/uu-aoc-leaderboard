@@ -35,14 +35,17 @@ export interface PreProcessData {
   startTime: Date;
   starOne: Date;
   starTwo: Date;
-  timeTakenMs: number
+  timeTakenMsOne: number;
+  timeTakenMsTwo: number;
 }
 
-export interface ScoreEntry {
-  timeTakenMs: number;
+export interface ScoreData {
+  timeTakenMsOne: number;
+  timeTakenMsTwo: number;
+  totalTimeTakenMs: number;
   score: number;
 }
 
-export interface ScoreEntryUserName extends ScoreEntry { 
+export interface ScoreDataUserName extends ScoreData {
   username: string;
 }

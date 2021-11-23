@@ -10,14 +10,13 @@ import {
 } from "@material-ui/core";
 import _ from "lodash";
 import React from "react";
+import { calculateScores } from "./calculatescores";
 import {
   APIData,
   Column,
   HasStars,
   PreProcessData,
   Row,
-  ScoreEntry,
-  ScoreEntryUserName,
 } from "./leaderboard-table.types";
 const columns: readonly Column[] = [
   { id: "user", label: "Name", minWidth: 170 },
@@ -153,7 +152,7 @@ function LeaderBoardTable() {
         user: userEntry[0],
         stars: stars,
         score: scoreMap.get(userEntry[0])?.score,
-        totalTime: scoreMap.get(userEntry[0])?.timeTakenMs,
+        totalTime: scoreMap.get(userEntry[0])?.totalTimeTakenMs,
       };
       rowData.push(row);
     });
@@ -162,53 +161,30 @@ function LeaderBoardTable() {
   };
 
   const getPreProcessedData = (data: APIData[]) => {
-    return data.map((x) => {
-      const starOne = x.starOne ? new Date(x.starOne) : null;
-      const starTwo = x.starTwo ? new Date(x.starTwo) : null;
-      const startTime = x.startTime ? new Date(x.startTime) : null;
-      return {
-        day: x.day,
-        year: x.year,
-        username: x.username,
-        starOne,
-        starTwo,
-        startTime,
-        timeTakenMs: getTimeTaken(startTime, starOne, starTwo),
-      } as PreProcessData;
-    });
+    return data
+      .filter((x) => x.starOne && x.startTime)
+      .map((x) => {
+        const startTime = new Date(x.startTime);
+        const starOne = new Date(x.starOne);
+        const starTwo = x.starTwo ? new Date(x.starTwo) : null;
+        return {
+          day: x.day,
+          year: x.year,
+          username: x.username,
+          starOne,
+          starTwo,
+          startTime,
+          timeTakenMsOne: getTimeTaken(startTime, starOne),
+          timeTakenMsTwo: getTimeTaken(startTime, starTwo),
+        } as PreProcessData;
+      });
   };
 
-  const getTimeTaken = (startTime: Date, starOne: Date, starTwo: Date) => {
-    if (!startTime || !starOne) {
+  const getTimeTaken = (startTime: Date, star: Date) => {
+    if (!startTime || !star) {
       return null;
     }
-    return starTwo
-      ? starTwo.valueOf() - startTime.valueOf()
-      : starOne.valueOf() - startTime.valueOf();
-  };
-
-  const calculateScores = (data: PreProcessData[]) => {
-    var result = new Map<string, ScoreEntry>();
-    var days = _.sortBy(_.groupBy(data, "day"), ["timeTakenMs"], ["asc"]);
-    var scoresPerDay = days.map((day) =>
-      day.map((x, ind) => {
-        return {
-          score: day.length - ind,
-          timeTakenMs: x.timeTakenMs,
-          username: x.username,
-        } as ScoreEntryUserName;
-      })
-    );
-    scoresPerDay.forEach((day) =>
-      day.forEach((x) => {
-        var entry = result.get(x.username) ?? { score: 0, timeTakenMs: 0 };
-        result.set(x.username, {
-          score: entry.score + x.score,
-          timeTakenMs: entry.timeTakenMs + x.timeTakenMs,
-        });
-      })
-    );
-    return result;
+    return star.valueOf() - startTime.valueOf();
   };
 
   return (
