@@ -3,18 +3,19 @@ export interface Column {
   label: string;
   minWidth?: number;
   align?: "right";
-  format?: (value: unknown) => string;
+  format?: (value: unknown) => JSX.Element;
 }
 
 
 export interface Row {
   user: string;
-  stars: HasStars[];
+  stars: StarData[];
   totalTime: number;
   score: number;
 } 
 
-export interface HasStars {
+export interface StarData {
+  day: number;
   one: boolean;
   two: boolean;
 }

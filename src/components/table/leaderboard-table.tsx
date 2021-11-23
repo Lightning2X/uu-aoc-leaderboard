@@ -12,30 +12,34 @@ import _ from "lodash";
 import React from "react";
 import { calculateScores } from "./calculatescores";
 import {
+  miliSecondTableFormatter,
+  starTableFormatter,
+} from "./leaderboard-table-formatters";
+import {
   APIData,
   Column,
-  HasStars,
   PreProcessData,
   Row,
+  StarData,
 } from "./leaderboard-table.types";
 import styles from "./table.module.scss";
 
 const columns: readonly Column[] = [
   { id: "user", label: "Name", minWidth: 170 },
-  { id: "totalTime", label: "Total time", minWidth: 100 },
+  { id: "score", label: "Score", minWidth: 100 },
+
   {
     id: "stars",
     label: "Stars",
     minWidth: 100,
-    format: (value: unknown) => {
-      return _.reduce(
-        value as HasStars[],
-        (sum, x) => [x.one, x.two].filter(Boolean).length + sum,
-        0
-      ).toString();
-    },
+    format: starTableFormatter,
   },
-  { id: "score", label: "Score", minWidth: 100 },
+  {
+    id: "totalTime",
+    label: "Total time",
+    minWidth: 100,
+    format: miliSecondTableFormatter,
+  },
 ];
 
 const fakeData: APIData[] = [
@@ -61,7 +65,7 @@ const fakeData: APIData[] = [
     username: "Rutgerdj",
     startTime: "2021-11-22T20:15:37.987Z",
     starOne: "2021-11-22T20:19:19.487Z",
-    starTwo: "2021-11-22T20:25:09.290Z",
+    starTwo: null,
   },
   {
     year: 2020,
@@ -85,7 +89,7 @@ const fakeData: APIData[] = [
     username: "Lightning2x",
     startTime: "2021-11-22T20:28:28.960Z",
     starOne: "2021-11-22T21:15:10.663Z",
-    starTwo: "2021-11-22T21:16:13.987Z",
+    starTwo: null,
   },
   {
     year: 2020,
@@ -159,11 +163,11 @@ function LeaderBoardTable() {
     var rowData = [] as Row[];
     Object.entries(grouped).forEach((userEntry) => {
       const stars = userEntry[1].map((x) => {
-        return { one: !!x.starOne, two: !!x.starTwo } as HasStars;
+        return { day: x.day, one: !!x.starOne, two: !!x.starTwo } as StarData;
       });
       const row: Row = {
         user: userEntry[0],
-        stars: stars,
+        stars: _.sortBy(stars, ["day"], ["asc"]),
         score: scoreMap.get(userEntry[0])?.score,
         totalTime: scoreMap.get(userEntry[0])?.totalTimeTakenMs,
       };
