@@ -8,7 +8,6 @@ export const starTableFormatter = (value: unknown) => {
   var starDataArray = value as StarData[];
   const lastDay = 25;
 
-  console.log(starDataArray.filter((x) => x.two).length);
   return (
     <React.Fragment>
       {starDataArray.map((x) => (
