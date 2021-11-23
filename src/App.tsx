@@ -10,7 +10,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.scss";
 import NavBar from "./components/navBar/navBar";
-import MainPage from "./mainPage/mainPage";
+import MainPage from "./pages/mainPage/mainPage";
 
 // Create a theme instance.
 let theme = createTheme({
