@@ -25,19 +25,19 @@ import {
 import styles from "./table.module.scss";
 
 const columns: readonly Column[] = [
-  { id: "user", label: "Name", minWidth: 170 },
-  { id: "score", label: "Score", minWidth: 100 },
+  { id: "user", label: "Name", minWidth: 75 },
+  { id: "score", label: "Score", minWidth: 75 },
 
   {
     id: "stars",
     label: "Stars",
-    minWidth: 100,
+    minWidth: 75,
     format: starTableFormatter,
   },
   {
     id: "totalTime",
     label: "Total time",
-    minWidth: 100,
+    minWidth: 75,
     format: miliSecondTableFormatter,
   },
 ];
