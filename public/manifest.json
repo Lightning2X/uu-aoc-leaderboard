@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "UU-AOC",
+  "name": "Advent of Code Timed Leaderboards",
   "icons": [
     {
       "src": "favicon.ico",
