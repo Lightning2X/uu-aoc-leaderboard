@@ -43,8 +43,8 @@ function LeaderBoardTable(props: LeaderBoardTableProps) {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   useEffect(() => {
-    leaderBoardDataStore.getLeaderBoardData("1271673");
-  }, []);
+    leaderBoardDataStore.getLeaderBoardData(id);
+  }, [id]);
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
