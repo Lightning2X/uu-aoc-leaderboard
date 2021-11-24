@@ -16,7 +16,7 @@ import {
   miliSecondTableFormatter,
   starTableFormatter,
 } from "./leaderboard-table-formatters";
-import { Column } from "./leaderboard-table.types";
+import { Column, LeaderBoardTableProps } from "./leaderboard-table.types";
 import styles from "./table.module.scss";
 
 const columns: readonly Column[] = [
@@ -37,7 +37,8 @@ const columns: readonly Column[] = [
   },
 ];
 
-function LeaderBoardTable() {
+function LeaderBoardTable(props: LeaderBoardTableProps) {
+  const { id } = props;
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 

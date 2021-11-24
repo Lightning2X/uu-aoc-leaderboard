@@ -6,11 +6,12 @@ import {
   ThemeProvider,
 } from "@material-ui/core";
 import "fontsource-roboto";
+import LandingPage from "pages/landingPage/landingPage";
+import LeaderBoardPage from "pages/leaderBoardPage/leaderBoardPage"
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.scss";
 import NavBar from "./components/navBar/navBar";
-import LeaderBoardPage from "./pages/leaderBoardPage/leaderBoardPage";
 
 // Create a theme instance.
 let theme = createTheme({
@@ -44,8 +45,11 @@ function App() {
         <header className="App-header"></header>
         <Router>
           <Switch>
-            <Route path="/">
+            <Route path="/leaderboard/:id">
               <LeaderBoardPage />
+            </Route>
+            <Route path="/">
+              <LandingPage />
             </Route>
           </Switch>
         </Router>
