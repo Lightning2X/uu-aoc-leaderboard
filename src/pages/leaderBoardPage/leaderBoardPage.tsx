@@ -1,8 +1,8 @@
 import LeaderBoardTable from "components/leaderboard/table/leaderboard-table";
 import React from "react";
 import styles from "../page.module.scss";
-import { MainPageProps } from "./mainPage.types";
-function MainPage(props: MainPageProps) {
+import { LeaderBoardPageProps } from "./leaderBoardPage.types";
+function LeaderBoardPage(props: LeaderBoardPageProps) {
   return (
     <div className={styles["page-container"]}>
       <LeaderBoardTable />
@@ -10,4 +10,4 @@ function MainPage(props: MainPageProps) {
   );
 }
 
-export default MainPage;
+export default LeaderBoardPage;

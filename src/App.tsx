@@ -10,7 +10,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.scss";
 import NavBar from "./components/navBar/navBar";
-import MainPage from "./pages/mainPage/mainPage";
+import LeaderBoardPage from "./pages/leaderBoardPage/leaderBoardPage";
 
 // Create a theme instance.
 let theme = createTheme({
@@ -44,11 +44,8 @@ function App() {
         <header className="App-header"></header>
         <Router>
           <Switch>
-            <Route path="/about">
-              <MainPage />
-            </Route>
             <Route path="/">
-              <MainPage />
+              <LeaderBoardPage />
             </Route>
           </Switch>
         </Router>

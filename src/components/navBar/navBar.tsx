@@ -1,5 +1,5 @@
 import { AppBar, Box, IconButton, Toolbar } from "@material-ui/core";
-import { AlternateEmail, Chat, Home } from "@material-ui/icons";
+import { AlternateEmail, Chat, GitHub, Home } from "@material-ui/icons";
 import React from "react";
 
 function NavBar() {
@@ -16,7 +16,17 @@ function NavBar() {
         {/*Right side Icons*/}
         <Box display="flex" flexGrow={1} justifyContent="flex-end">
           <IconButton
-            href="https://discord.gg/5xu3ZQhyDm"
+            onClick={() =>
+              window.open("https://github.com/Lightning2X/uu-aoc-leaderboard")
+            }
+            edge="start"
+            color="inherit"
+            aria-label="source-code"
+          >
+            <GitHub className={"menu-icon"} />
+          </IconButton>
+          <IconButton
+            onClick={() => window.open("https://discord.gg/5xu3ZQhyDm")}
             edge="start"
             color="inherit"
             aria-label="discord"
