@@ -141,6 +141,8 @@ function LeaderBoardTable() {
     return star.valueOf() - startTime.valueOf();
   };
 
+  const rows = getRowsJSX(mapData(testData));
+
   return (
     <Paper className={styles["theme-paper"]}>
       <TableContainer style={{ maxHeight: "100%" }}>
@@ -159,15 +161,13 @@ function LeaderBoardTable() {
               ))}
             </TableRow>
           </TableHead>
-          <TableBody className={styles["theme-table-body"]}>
-            {getRowsJSX(mapData(testData))}
-          </TableBody>
+          <TableBody className={styles["theme-table-body"]}>{rows}</TableBody>
         </Table>
       </TableContainer>
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={0}
+        count={rows.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

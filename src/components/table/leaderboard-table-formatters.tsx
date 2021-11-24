@@ -1,6 +1,6 @@
 import { Star } from "@material-ui/icons";
 import React from "react";
-import { formatMiliseconds } from "../../shared/helpers/time";
+import { formatMiliseconds } from "shared/utilities";
 import { StarData } from "./leaderboard-table.types";
 import styles from "./table.module.scss";
 
