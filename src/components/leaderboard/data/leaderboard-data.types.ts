@@ -1,18 +1,9 @@
-export interface Column {
-  id: keyof Row;
-  label: string;
-  minWidth?: number;
-  align?: "right";
-  format?: (value: unknown) => JSX.Element;
-}
-
-
-export interface Row {
+export interface UserData {
   user: string;
   stars: StarData[];
   totalTime: number;
   score: number;
-} 
+}
 
 export interface StarData {
   day: number;
@@ -20,7 +11,7 @@ export interface StarData {
   two: boolean;
 }
 
-export interface APIData {
+export interface LeaderBoardDTO {
   year: number;
   day: number;
   username: string;
@@ -29,7 +20,7 @@ export interface APIData {
   starTwo: string;
 }
 
-export interface PreProcessData {
+export interface LeaderBoardData {
   year: number;
   day: number;
   username: string;

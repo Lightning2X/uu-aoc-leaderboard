@@ -1,12 +1,12 @@
 import { Star } from "@material-ui/icons";
 import React from "react";
+import { AOC_DAYS } from "shared/constants";
 import { formatMiliseconds } from "shared/utilities";
-import { StarData } from "./leaderboard-table.types";
+import { StarData } from "../data/leaderboard-data.types";
 import styles from "./table.module.scss";
 
 export const starTableFormatter = (value: unknown) => {
   var starDataArray = value as StarData[];
-  const lastDay = 25;
 
   return (
     <React.Fragment>
@@ -22,7 +22,7 @@ export const starTableFormatter = (value: unknown) => {
         (starDataArray.length * 2 -
           (starDataArray.length - starDataArray.filter((x) => x.two).length)) +
         " / " +
-        lastDay * 2 +
+        AOC_DAYS * 2 +
         "]"}
     </React.Fragment>
   );

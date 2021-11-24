@@ -1,6 +1,6 @@
-import { APIData } from "../components/table/leaderboard-table.types";
+import { LeaderBoardDTO } from "components/leaderboard/data/leaderboard-data.types";
 
-export const testData: APIData[] = [
+export const testData: LeaderBoardDTO[] = [
   {
     year: 2020,
     day: 1,

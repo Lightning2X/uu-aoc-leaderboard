@@ -8,21 +8,15 @@ import {
   TablePagination,
   TableRow,
 } from "@material-ui/core";
-import _ from "lodash";
-import React from "react";
-import { testData } from "../../shared/testData";
-import { calculateScores } from "./calculatescores";
+import React, { useEffect } from "react";
+import { withObserver } from "shared/stores";
+import { UserData } from "../data/leaderboard-data.types";
+import { leaderBoardDataStore } from "../data/leaderBoardData.store";
 import {
   miliSecondTableFormatter,
   starTableFormatter,
 } from "./leaderboard-table-formatters";
-import {
-  APIData,
-  Column,
-  PreProcessData,
-  Row,
-  StarData,
-} from "./leaderboard-table.types";
+import { Column } from "./leaderboard-table.types";
 import styles from "./table.module.scss";
 
 const columns: readonly Column[] = [
@@ -47,6 +41,10 @@ function LeaderBoardTable() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
+  useEffect(() => {
+    leaderBoardDataStore.getLeaderBoardData("1271673");
+  }, []);
+
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
@@ -58,7 +56,7 @@ function LeaderBoardTable() {
     setPage(0);
   };
 
-  const getRowsJSX = (rows: Row[]) => {
+  const getRowsJSX = (rows: UserData[]) => {
     return rows
       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
       .map((row) => {
@@ -88,60 +86,7 @@ function LeaderBoardTable() {
       });
   };
 
-  const mapData = (input: APIData[]) => {
-    const data = getPreProcessedData(input);
-    var grouped = _.mapValues(_.groupBy(data, "username"), (list) =>
-      list.map((user) => _.omit(user, "username"))
-    );
-    const scoreMap = calculateScores(data);
-    var rowData = [] as Row[];
-    Object.entries(grouped).forEach((userEntry) => {
-      const stars = userEntry[1].map((x) => {
-        return { day: x.day, one: !!x.starOne, two: !!x.starTwo } as StarData;
-      });
-      const row: Row = {
-        user: userEntry[0],
-        stars: _.sortBy(stars, ["day"], ["asc"]),
-        score: scoreMap.get(userEntry[0])?.score,
-        totalTime: scoreMap.get(userEntry[0])?.totalTimeTakenMs,
-      };
-      rowData.push(row);
-    });
-
-    return rowData;
-  };
-
-  const getPreProcessedData = (data: APIData[]) => {
-    return (
-      data
-        // We do not care for anything that will not result in a score
-        .filter((x) => x.starOne && x.startTime)
-        .map((x) => {
-          const startTime = new Date(x.startTime);
-          const starOne = new Date(x.starOne);
-          const starTwo = x.starTwo ? new Date(x.starTwo) : null;
-          return {
-            day: x.day,
-            year: x.year,
-            username: x.username,
-            starOne,
-            starTwo,
-            startTime,
-            timeTakenMsOne: getTimeTaken(startTime, starOne),
-            timeTakenMsTwo: getTimeTaken(startTime, starTwo),
-          } as PreProcessData;
-        })
-    );
-  };
-
-  const getTimeTaken = (startTime: Date, star: Date) => {
-    if (!startTime || !star) {
-      return null;
-    }
-    return star.valueOf() - startTime.valueOf();
-  };
-
-  const rows = getRowsJSX(mapData(testData));
+  const rows = getRowsJSX(leaderBoardDataStore.userData);
 
   return (
     <Paper className={styles["theme-paper"]}>
@@ -177,4 +122,4 @@ function LeaderBoardTable() {
   );
 }
 
-export default LeaderBoardTable;
+export default withObserver(LeaderBoardTable);

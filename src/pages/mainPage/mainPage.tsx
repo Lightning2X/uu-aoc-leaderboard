@@ -1,5 +1,5 @@
+import LeaderBoardTable from "components/leaderboard/table/leaderboard-table";
 import React from "react";
-import LeaderBoardTable from "../../components/table/leaderboard-table";
 import styles from "../page.module.scss";
 import { MainPageProps } from "./mainPage.types";
 function MainPage(props: MainPageProps) {

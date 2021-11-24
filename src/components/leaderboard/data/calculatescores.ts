@@ -1,8 +1,7 @@
 import _ from "lodash"
-import { PreProcessData, ScoreData, ScoreDataUserName } from "./leaderboard-table.types"
+import { LeaderBoardData, ScoreData, ScoreDataUserName } from "./leaderboard-data.types"
 
-export const calculateScores = (data: PreProcessData[]) => {
-    console.log("data", data)
+export const calculateScores = (data: LeaderBoardData[]) => { 
   var result = new Map<string, ScoreData>();
   // Sort on time taken to find the top scoring users
   var daysOne = _.sortBy(_.groupBy(data, "day"), ["timeTakenMsOne"], ["asc"]);
