@@ -1,8 +1,8 @@
 import MultiUseTable from "components/table/table";
 import { Column } from "components/table/table.types";
 import React, { useEffect } from "react";
-import { withObserver } from "shared/stores";
-import { leaderBoardDataStore } from "../data/leaderBoardData.store";
+import { useStore, withObserver } from "shared/stores";
+import { leaderBoardDataLocalStore } from "../data/leaderBoardData.store";
 import {
   miliSecondTableFormatter,
   starTableFormatter,
@@ -11,9 +11,11 @@ import { LeaderBoardTableProps } from "./leaderboard-table.types";
 
 function LeaderBoardTable(props: LeaderBoardTableProps) {
   const { id } = props;
+  const { getLeaderBoardData, userData } = useStore(leaderBoardDataLocalStore);
+
   useEffect(() => {
-    leaderBoardDataStore.getLeaderBoardData(id);
-  }, [id]);
+    getLeaderBoardData(id);
+  }, [getLeaderBoardData, id]);
 
   const columns: Column[] = [
     { id: "user", label: "Name", minWidth: 75 },
@@ -33,9 +35,7 @@ function LeaderBoardTable(props: LeaderBoardTableProps) {
     },
   ];
 
-  return (
-    <MultiUseTable columns={columns} data={leaderBoardDataStore.userData} />
-  );
+  return <MultiUseTable columns={columns} data={userData} />;
 }
 
 export default withObserver(LeaderBoardTable);
