@@ -3,7 +3,7 @@ import React from "react";
 import { AOC_DAYS } from "shared/constants";
 import { formatMiliseconds } from "shared/utilities";
 import { StarData } from "../data/leaderboard-data.types";
-import styles from "./table.module.scss";
+import styles from "./leaderboard-table.module.scss";
 
 export const starTableFormatter = (value: unknown) => {
   var starDataArray = value as StarData[];

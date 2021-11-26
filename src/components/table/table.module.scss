@@ -1,4 +1,4 @@
-@import "../../../shared/variables.scss";
+@import "../../shared/variables.scss";
 
 .theme-paper {
     color: $theme-text;
@@ -31,8 +31,5 @@
     color: inherit !important;
     background-color: inherit !important;
     border-bottom-color: $theme-primary !important;
-}
-.star-icon {
-    vertical-align: bottom;
 }
    
