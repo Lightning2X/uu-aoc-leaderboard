@@ -19,8 +19,7 @@ function MultiUseTable(props: MultiUseTableProps) {
   const { page, rowsPerPage, setPage, setRowsPerPage } =
     useStore(tableLocalStore);
 
-  const handleChangePage = (event: unknown, newPage: number) => {
-    console.log(event);
+  const handleChangePage = (event: unknown, newPage: number) => {   
     setPage(newPage);
   };
 
