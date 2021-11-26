@@ -1,6 +1,7 @@
-import { AppBar, Box, IconButton, Toolbar } from "@material-ui/core";
-import { AlternateEmail, Chat, GitHub, Home } from "@material-ui/icons";
+import { AppBar, Box, Button, IconButton, Toolbar } from "@material-ui/core";
+import { AlternateEmail, GitHub, Home } from "@material-ui/icons";
 import React from "react";
+import styles from "./navBar.module.scss";
 
 function NavBar() {
   return (
@@ -15,32 +16,24 @@ function NavBar() {
 
         {/*Right side Icons*/}
         <Box display="flex" flexGrow={1} justifyContent="flex-end">
-          <IconButton
+          <Button
+            className={styles.button}
+            variant="outlined"
             onClick={() =>
               window.open("https://github.com/Lightning2X/uu-aoc-leaderboard")
             }
-            edge="start"
-            color="inherit"
-            aria-label="source-code"
+            startIcon={<GitHub className={"menu-icon"} />}
           >
-            <GitHub className={"menu-icon"} />
-          </IconButton>
-          <IconButton
-            onClick={() => window.open("https://discord.gg/5xu3ZQhyDm")}
-            edge="start"
-            color="inherit"
-            aria-label="discord"
-          >
-            <Chat className={"menu-icon"} />
-          </IconButton>
-          <IconButton
+            Source
+          </Button>
+          <Button
+            className={styles.button}
+            variant="outlined"
             href="mailto:tim@schagen.dev"
-            edge="start"
-            color="inherit"
-            aria-label="mail"
+            startIcon={<AlternateEmail className={"menu-icon"} />}
           >
-            <AlternateEmail className={"menu-icon"} />
-          </IconButton>
+            Contact
+          </Button>
         </Box>
       </Toolbar>
     </AppBar>
