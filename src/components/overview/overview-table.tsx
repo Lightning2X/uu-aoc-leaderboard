@@ -6,20 +6,21 @@ import { useStore, withObserver } from "shared/stores";
 import { overviewLocalStore } from "./overview.store";
 
 function OverviewTable() {
-  const { leaderBoards } = useStore(overviewLocalStore);
+  const { leaderBoards, isLoading } = useStore(overviewLocalStore);
   const history = useHistory();
   const onRowClick = (row: any) => {
     history.push(`leaderboard/${row.id}`);
   };
   const columns: Column[] = [
     { id: "name", label: "Name", minWidth: 75 },
-    { id: "id", label: "id", minWidth: 75 },
+    { id: "id", label: "Identifier", minWidth: 75 },
   ];
 
   return (
     <MultiUseTable
       columns={columns}
       data={leaderBoards}
+      isLoading={isLoading}
       onRowClick={onRowClick}
     />
   );

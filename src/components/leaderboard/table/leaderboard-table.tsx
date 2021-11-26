@@ -11,7 +11,9 @@ import { LeaderBoardTableProps } from "./leaderboard-table.types";
 
 function LeaderBoardTable(props: LeaderBoardTableProps) {
   const { id } = props;
-  const { getLeaderBoardData, userData } = useStore(leaderBoardDataLocalStore);
+  const { getLeaderBoardData, userData, isLoading } = useStore(
+    leaderBoardDataLocalStore
+  );
 
   useEffect(() => {
     getLeaderBoardData(id);
@@ -35,7 +37,9 @@ function LeaderBoardTable(props: LeaderBoardTableProps) {
     },
   ];
 
-  return <MultiUseTable columns={columns} data={userData} />;
+  return (
+    <MultiUseTable columns={columns} data={userData} isLoading={isLoading} />
+  );
 }
 
 export default withObserver(LeaderBoardTable);

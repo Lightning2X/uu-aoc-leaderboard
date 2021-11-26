@@ -3,6 +3,10 @@ import { LeaderBoardInfoDTO } from "./overview.types";
 
 export const overviewLocalStore = () => ({
   leaderBoards: [] as LeaderBoardInfoDTO[],
+  isLoading: false,
+  setIsLoading(isLoading: boolean) {
+    this.isLoading = isLoading;
+  },
   setLeaderBoards(leaderboards: LeaderBoardInfoDTO[]) {
     this.leaderBoards = leaderboards;
   },
@@ -11,7 +15,9 @@ export const overviewLocalStore = () => ({
   },
 
   async refresh() {
+    this.setIsLoading(true);
     const result = await getAllLeaderBoards();
     this.setLeaderBoards(result);
+    this.setIsLoading(false);
   },
 });
