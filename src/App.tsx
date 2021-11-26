@@ -3,11 +3,12 @@ import {
   createTheme,
   CssBaseline,
   responsiveFontSizes,
+  StylesProvider,
   ThemeProvider,
 } from "@material-ui/core";
 import "fontsource-roboto";
 import LandingPage from "pages/landingPage/landingPage";
-import LeaderBoardPage from "pages/leaderBoardPage/leaderBoardPage"
+import LeaderBoardPage from "pages/leaderBoardPage/leaderBoardPage";
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.scss";
@@ -38,23 +39,25 @@ theme = responsiveFontSizes(theme);
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <div className="app">
-        <NavBar />
-        <header className="App-header"></header>
-        <Router>
-          <Switch>
-            <Route path="/leaderboard/:id">
-              <LeaderBoardPage />
-            </Route>
-            <Route path="/">
-              <LandingPage />
-            </Route>
-          </Switch>
-        </Router>
-      </div>
-    </ThemeProvider>
+    <StylesProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <div className="app">
+          <NavBar />
+          <header className="App-header"></header>
+          <Router>
+            <Switch>
+              <Route path="/leaderboard/:id">
+                <LeaderBoardPage />
+              </Route>
+              <Route path="/">
+                <LandingPage />
+              </Route>
+            </Switch>
+          </Router>
+        </div>
+      </ThemeProvider>
+    </StylesProvider>
   );
 }
 
