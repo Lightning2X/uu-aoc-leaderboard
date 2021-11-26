@@ -1,9 +1,8 @@
 @import "../../shared/variables.scss";
 
-.theme-paper {
-    color: $theme-text;
-    background-color: $theme-secondary !important;
-    width: 100%;
+.theme-paper { 
+    background-color: $theme-secondary;
+    min-width: 50%;
     overflow: hidden;
 }
 
@@ -14,6 +13,7 @@
 
 .theme-table-header-cell { 
     color: inherit !important;
+    font-weight: bold !important;
     background-color: inherit !important;
     border-bottom-color: $theme-primary !important;
 }
@@ -31,5 +31,9 @@
     color: inherit !important;
     background-color: inherit !important;
     border-bottom-color: $theme-primary !important;
+}
+
+.theme-rows-per-page-list {  
+    background-color: $theme-secondary;
 }
    

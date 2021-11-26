@@ -1,4 +1,9 @@
+@import "./shared/variables.scss";
+
 .app {  
   min-height: 100vh;
 }
 
+.MuiMenu-list  { 
+  background-color: $theme-secondary;
+}
