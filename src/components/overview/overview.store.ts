@@ -1,8 +1,7 @@
-import { asGlobalStore } from "shared/stores"; 
-import { getAllLeaderBoards } from "./site.repository"
-import { LeaderBoardInfoDTO } from "./site.types";
+import { getAllLeaderBoards } from "./overview.repository";
+import { LeaderBoardInfoDTO } from "./overview.types";
 
-const createStore = () => ({
+export const overviewLocalStore = () => ({
   leaderBoards: [] as LeaderBoardInfoDTO[],
   setLeaderBoards(leaderboards: LeaderBoardInfoDTO[]) {
     this.leaderBoards = leaderboards;
@@ -16,5 +15,3 @@ const createStore = () => ({
     this.setLeaderBoards(result);
   },
 });
-
-export const siteStore = asGlobalStore(createStore());

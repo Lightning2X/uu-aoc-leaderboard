@@ -15,7 +15,7 @@ import { tableLocalStore } from "./table.store";
 import { MultiUseTableProps } from "./table.types";
 
 function MultiUseTable(props: MultiUseTableProps) {
-  const { columns, data } = props;
+  const { columns, data, onRowClick } = props;
   const { page, rowsPerPage, setPage, setRowsPerPage } =
     useStore(tableLocalStore);
 
@@ -40,6 +40,7 @@ function MultiUseTable(props: MultiUseTableProps) {
             hover
             role="checkbox"
             tabIndex={-1}
+            onClick={() => onRowClick(row)}
             key={row.id}
           >
             {columns.map((column) => {

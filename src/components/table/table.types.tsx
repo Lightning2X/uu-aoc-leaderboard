@@ -1,6 +1,7 @@
 export interface MultiUseTableProps {
   columns: Column[];
   data: any[];
+  onRowClick?: (row: any) => void;
 }
 
 export interface Column {
