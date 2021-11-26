@@ -20,6 +20,7 @@ function MultiUseTable(props: MultiUseTableProps) {
     useStore(tableLocalStore);
 
   const handleChangePage = (event: unknown, newPage: number) => {
+    console.log(event);
     setPage(newPage);
   };
 
@@ -87,7 +88,7 @@ function MultiUseTable(props: MultiUseTableProps) {
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={rows.length}
+        count={data.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}
