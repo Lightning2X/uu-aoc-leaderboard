@@ -40,7 +40,7 @@ function MultiUseTable(props: MultiUseTableProps) {
             hover
             role="checkbox"
             tabIndex={-1}
-            onClick={() => onRowClick(row)}
+            onClick={onRowClick ? () => onRowClick(row) : undefined}
             key={row.id}
           >
             {columns.map((column) => {
