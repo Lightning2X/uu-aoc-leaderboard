@@ -1,7 +1,6 @@
 import MultiUseTable from "components/table/table";
 import { Column } from "components/table/table.types";
 import React from "react";
-import { withObserver } from "shared/stores";
 import {
   miliSecondTableFormatter,
   starTableFormatter,
@@ -39,4 +38,4 @@ function LeaderBoardTable(props: LeaderBoardTableProps) {
   );
 }
 
-export default withObserver(LeaderBoardTable);
+export default LeaderBoardTable;
