@@ -6,7 +6,6 @@ import {
   StylesProvider,
   ThemeProvider,
 } from "@material-ui/core";
-import { PageNav } from "components/page-nav/page-nav";
 import "fontsource-roboto";
 import LandingPage from "pages/landingPage/landingPage";
 import LeaderBoardPage from "pages/leaderBoardPage/leaderBoardPage";

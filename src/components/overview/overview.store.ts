@@ -1,7 +1,8 @@
+import { asGlobalStore } from "shared/stores"
 import { getAllLeaderBoards } from "./overview.repository";
 import { LeaderBoardInfoDTO } from "./overview.types";
 
-export const overviewLocalStore = () => ({
+const createStore = () => ({
   leaderBoards: [] as LeaderBoardInfoDTO[],
   isLoading: false,
   setIsLoading(isLoading: boolean) {
@@ -21,3 +22,5 @@ export const overviewLocalStore = () => ({
     this.setIsLoading(false);
   },
 });
+
+export const overviewStore = asGlobalStore(createStore())

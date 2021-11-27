@@ -1,4 +1,5 @@
 import LeaderBoardTable from "components/leaderboard/table/leaderboard-table";
+import { overviewStore } from "components/overview/overview.store"
 import { PageNav } from "components/page-nav/page-nav"
 import React from "react";
 import { useParams } from "react-router-dom";
@@ -10,6 +11,7 @@ function LeaderBoardPage() {
   return (
     <div className={styles["page-container"]}>
       <PageNav />
+      <h1>{overviewStore.leaderBoards.find(x => x.id === id).name}</h1>
       <LeaderBoardTable id={id} />
     </div>
   );
