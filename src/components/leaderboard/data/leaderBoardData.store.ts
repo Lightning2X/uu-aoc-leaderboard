@@ -8,8 +8,12 @@ export const leaderBoardDataLocalStore = () => ({
   userData: [] as UserData[],
   year: 2020,
   isLoading: false,
+  isError: false,
   setIsLoading(isLoading: boolean) {
     this.isLoading = isLoading;
+  },
+  setIsError(isError: boolean) {
+    this.isError = isError;
   },
   setName(name: string) {
     this.name = name;
@@ -22,7 +26,11 @@ export const leaderBoardDataLocalStore = () => ({
   },
   async getLeaderBoardData(id: string) {
     this.setIsLoading(true);
-    const result = await getLeaderBoardDataRequest(id, this.year);
+    var response = await getLeaderBoardDataRequest(id, this.year);
+    if (!response.success) {
+      this.setIsError(true)
+    } 
+    const result = response.result
     this.setName(result.name);
     const leaderBoardData = mapToLeaderBoardData(result.challenges);
     this.setLeaderBoardData(leaderBoardData);

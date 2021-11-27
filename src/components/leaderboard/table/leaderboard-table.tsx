@@ -9,7 +9,7 @@ import {
 import { LeaderBoardTableProps } from "./leaderboard-table.types";
 
 function LeaderBoardTable(props: LeaderBoardTableProps) {
-  const { userData, isLoading } = props;
+  const { userData, isLoading, isError } = props;
 
   const columns: Column[] = [
     { id: "user", label: "Name", minWidth: 75 },
@@ -30,7 +30,12 @@ function LeaderBoardTable(props: LeaderBoardTableProps) {
   ];
 
   return (
-    <MultiUseTable columns={columns} data={userData} isLoading={isLoading} />
+    <MultiUseTable
+      columns={columns}
+      data={userData}
+      isLoading={isLoading}
+      isError={isError}
+    />
   );
 }
 

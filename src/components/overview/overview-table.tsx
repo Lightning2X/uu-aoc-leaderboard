@@ -2,10 +2,11 @@ import MultiUseTable from "components/table/table";
 import { Column } from "components/table/table.types";
 import React from "react";
 import { useHistory } from "react-router";
-import { withObserver } from "shared/stores";
-import { overviewStore } from "./overview.store";
+import { useStore, withObserver } from "shared/stores";
+import { overviewLocalStore } from "./overview.store";
 
 function OverviewTable() {
+  const { isError, isLoading, leaderBoards } = useStore(overviewLocalStore);
   const history = useHistory();
   const onRowClick = (row: any) => {
     history.push(`leaderboard/${row.id}`);
@@ -18,8 +19,9 @@ function OverviewTable() {
   return (
     <MultiUseTable
       columns={columns}
-      data={overviewStore.leaderBoards}
-      isLoading={overviewStore.isLoading}
+      data={leaderBoards}
+      isLoading={isLoading}
+      isError={isError}
       onRowClick={onRowClick}
     />
   );

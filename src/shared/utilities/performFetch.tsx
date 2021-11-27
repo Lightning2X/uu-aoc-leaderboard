@@ -1,13 +1,24 @@
 import { API_URL } from "shared/constants";
+import { APIResponse } from "./apiResult.types";
 
 export async function extractData<DataType>(
-  response: Promise<Response>
+  response: Response
 ): Promise<DataType> {
-  return (await (await response).json()) as unknown as DataType;
+  return (await response.json()) as unknown as DataType;
 }
 
 export async function performAPIFetch<DataType>(path: string) {
-  return extractData<DataType>(performFetch(API_URL + path, "GET"));
+  var promise = performFetch(API_URL + path, "GET");
+  return promise
+    .then(async (x) => {
+      return {
+        success: true,
+        result: await extractData<DataType>(x),
+      } as APIResponse<DataType>;
+    })
+    .catch(async (x) => {
+      return { success: false, result: null } as APIResponse<DataType>;
+    });
 }
 
 export const performFetch = (

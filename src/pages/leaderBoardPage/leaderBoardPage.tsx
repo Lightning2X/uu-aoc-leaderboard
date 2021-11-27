@@ -10,7 +10,7 @@ import styles from "../page.module.scss";
 function LeaderBoardPage() {
   const { id } = useParams<IDParams>();
 
-  const { getLeaderBoardData, name, userData, isLoading } = useStore(
+  const { getLeaderBoardData, name, userData, isLoading, isError } = useStore(
     leaderBoardDataLocalStore
   );
 
@@ -22,7 +22,11 @@ function LeaderBoardPage() {
     <div className={styles["page-container"]}>
       <PageNav />
       <h1>{name}</h1>
-      <LeaderBoardTable userData={userData} isLoading={isLoading} />
+      <LeaderBoardTable
+        userData={userData}
+        isLoading={isLoading}
+        isError={isError}
+      />
     </div>
   );
 }

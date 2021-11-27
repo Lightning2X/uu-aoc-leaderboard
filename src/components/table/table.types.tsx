@@ -2,6 +2,7 @@ export interface MultiUseTableProps {
   columns: Column[];
   data: any[];
   isLoading: boolean;
+  isError: boolean;
   onRowClick?: (row: any) => void;
 }
 

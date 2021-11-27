@@ -15,10 +15,20 @@ import { tableLocalStore } from "./table.store";
 import { MultiUseTableProps } from "./table.types";
 
 function MultiUseTable(props: MultiUseTableProps) {
-  const { columns, data, onRowClick } = props;
+  const { columns, data, isLoading, isError, onRowClick } = props;
+
   const { page, rowsPerPage, setPage, setRowsPerPage } =
     useStore(tableLocalStore);
-
+  if (isError) {
+    return (
+      <h1 style={{ color: "red" }}>
+        An Error has occurred, please try again later
+      </h1>
+    );
+  }
+  if (isLoading) {
+    return <img src="/loading.png" className="svgLoader" alt="loading"></img>;
+  }
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
