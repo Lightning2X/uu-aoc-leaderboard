@@ -1,10 +1,10 @@
-import { mapToLeaderBoardData, mapToUserData } from "./leaderboard-data-utils"
-import { LeaderBoardData, UserData } from "./leaderboard-data.types" 
+import { mapToChallengeData, mapToUserData } from "./leaderboard-data-utils"
+import { ChallengeData, UserData } from "./leaderboard-data.types" 
 import { getLeaderBoardDataRequest } from "./leaderBoardData.repository"
 
 export const leaderBoardDataLocalStore = () => ({
   name: null as string,
-  leaderBoardData: [] as LeaderBoardData[],
+  leaderBoardData: [] as ChallengeData[],
   userData: [] as UserData[],
   year: 2020,
   isLoading: true,
@@ -18,7 +18,7 @@ export const leaderBoardDataLocalStore = () => ({
   setName(name: string) {
     this.name = name;
   },
-  setLeaderBoardData(leaderBoardData: LeaderBoardData[]) {
+  setLeaderBoardData(leaderBoardData: ChallengeData[]) {
     this.leaderBoardData = leaderBoardData;
   },
   setUserData(userData: UserData[]) {
@@ -33,7 +33,7 @@ export const leaderBoardDataLocalStore = () => ({
     } 
     const result = response.result
     this.setName(result.name);
-    const leaderBoardData = mapToLeaderBoardData(result.challenges);
+    const leaderBoardData = mapToChallengeData(result.challenges);
     this.setLeaderBoardData(leaderBoardData);
     this.setUserData(mapToUserData(leaderBoardData));
     this.setIsLoading(false);

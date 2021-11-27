@@ -2,6 +2,7 @@ import { Button } from "@material-ui/core";
 import { GitHub } from "@material-ui/icons";
 import PlaceHolder from "components/placeholder/placeholder";
 import defaultProfilePic from "shared/media/default_profile.png";
+import StarChart from "./star-chart/star-chart";
 import styles from "./user.module.scss";
 import { UserPageContentProps } from "./user.types";
 function UserPageContent(props: UserPageContentProps) {
@@ -18,16 +19,16 @@ function UserPageContent(props: UserPageContentProps) {
         alt={"Github profile img"}
       />
       <Button
-        className={styles["github-button"]}
+        className={styles.element}
         variant="outlined"
-        onClick={() =>
-          window.open(userInfo.githubPage)
-        }
+        onClick={() => window.open(userInfo.githubPage)}
         disabled={!userInfo.githubPage}
         startIcon={<GitHub className={"menu-icon"} />}
       >
         Github profile
       </Button>
+      <h3 className={styles.element}>Minutes per Star:</h3>
+      <StarChart data={userInfo.challenges} />
     </div>
   );
 }

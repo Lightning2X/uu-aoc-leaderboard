@@ -1,9 +1,10 @@
 import _ from "lodash"
 import { ChallengeDTO } from "shared/types/dto"
+import { getTimeDifference } from "shared/utilities"
 import { calculateScores } from "./calculatescores"
-import { UserData, StarData, LeaderBoardData } from "./leaderboard-data.types"
+import { UserData, StarData, ChallengeData } from "./leaderboard-data.types"
 
-export const mapToUserData = (data: LeaderBoardData[]) => { 
+export const mapToUserData = (data: ChallengeData[]) => { 
   var grouped = _.mapValues(_.groupBy(data, "userid"), (list) =>
     list.map((user) => _.omit(user, "userid"))
   ); 
@@ -26,7 +27,7 @@ export const mapToUserData = (data: LeaderBoardData[]) => {
   return userDataArray;
 };
 
-export const mapToLeaderBoardData = (data: ChallengeDTO[]) => {
+export const mapToChallengeData = (data: ChallengeDTO[]) => {
   return (
     data
       // We do not care for anything that will not result in a score
@@ -43,16 +44,11 @@ export const mapToLeaderBoardData = (data: ChallengeDTO[]) => {
           starOne,
           starTwo,
           startTime,
-          timeTakenMsOne: getTimeTaken(startTime, starOne),
-          timeTakenMsTwo: getTimeTaken(startTime, starTwo),
-        } as LeaderBoardData;
+          timeTakenMsOne: getTimeDifference(startTime, starOne),
+          timeTakenMsTwo: getTimeDifference(startTime, starTwo),
+        } as ChallengeData;
       })
   );
 };
 
-const getTimeTaken = (startTime: Date, star: Date) => {
-  if (!startTime || !star) {
-    return null;
-  }
-  return star.valueOf() - startTime.valueOf();
-};
+

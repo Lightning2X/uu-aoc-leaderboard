@@ -1,7 +1,7 @@
 import _ from "lodash"
-import { LeaderBoardData, ScoreData, ScoreDataUserId } from "./leaderboard-data.types"
+import { ChallengeData, ScoreData, ScoreDataUserId } from "./leaderboard-data.types"
 
-export const calculateScores = (data: LeaderBoardData[]) => { 
+export const calculateScores = (data: ChallengeData[]) => { 
   var result = new Map<string, ScoreData>();
   // Sort on time taken to find the top scoring users
   var daysOne = _.sortBy(_.groupBy(data, "day"), ["timeTakenMsOne"], ["asc"]);

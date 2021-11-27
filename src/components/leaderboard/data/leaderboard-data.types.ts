@@ -19,7 +19,7 @@ export interface LeaderBoardInfoDTO {
   challenges: ChallengeDTO[]
 }
 
-export interface LeaderBoardData {
+export interface ChallengeData {
   year: number;
   day: number;
   username: string;
