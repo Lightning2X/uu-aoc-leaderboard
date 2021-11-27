@@ -1,8 +1,8 @@
-import { getAllLeaderBoards } from "./overview.repository";
-import { LeaderBoardInfoDTO } from "./overview.types";
+import { LeaderBoardDTO } from "shared/types/dto"
+import { getAllLeaderBoards } from "./overview.repository"; 
 
 export const overviewLocalStore = () => ({
-  leaderBoards: [] as LeaderBoardInfoDTO[],
+  leaderBoards: [] as LeaderBoardDTO[],
   isLoading: true,
   isError: false,
   setIsLoading(isLoading: boolean) {
@@ -11,7 +11,7 @@ export const overviewLocalStore = () => ({
   setIsError(isError: boolean) {
     this.isError = isError;
   },
-  setLeaderBoards(leaderboards: LeaderBoardInfoDTO[]) {
+  setLeaderBoards(leaderboards: LeaderBoardDTO[]) {
     this.leaderBoards = leaderboards;
   },
   async onInitialize() {
@@ -20,8 +20,8 @@ export const overviewLocalStore = () => ({
 
   async refresh() {
     this.setIsLoading(true);
-    const response = await getAllLeaderBoards(); 
-    if (!response.success) { 
+    const response = await getAllLeaderBoards();
+    if (!response.success) {
       this.setIsError(true);
       return;
     }

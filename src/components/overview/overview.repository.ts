@@ -1,5 +1,5 @@
-import { performAPIFetch } from "shared/utilities";
-import { LeaderBoardInfoDTO } from "./overview.types";
+import { LeaderBoardDTO } from "shared/types/dto"
+import { performAPIFetch } from "shared/utilities"; 
 
 export const getAllLeaderBoards = async () =>
-  await performAPIFetch<LeaderBoardInfoDTO[]>("leaderboards");
+  await performAPIFetch<LeaderBoardDTO[]>("leaderboards");

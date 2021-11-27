@@ -1,3 +1,5 @@
+import { ChallengeDTO } from "shared/types/dto"
+
 export interface UserData {
   user: string;
   stars: StarData[];
@@ -11,18 +13,9 @@ export interface StarData {
   two: boolean;
 }
 
-export interface LeaderBoardEntryDTO {
-  year: number;
-  day: number;
-  username: string;
-  startTime: string;
-  starOne: string;
-  starTwo: string;
-}
-
-export interface LeaderBoardDTO {
+export interface LeaderBoardInfoDTO {
   name: string;
-  challenges: LeaderBoardEntryDTO[]
+  challenges: ChallengeDTO[]
 }
 
 export interface LeaderBoardData {

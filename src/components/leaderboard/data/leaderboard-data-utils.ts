@@ -1,6 +1,7 @@
 import _ from "lodash"
+import { ChallengeDTO } from "shared/types/dto"
 import { calculateScores } from "./calculatescores"
-import { LeaderBoardEntryDTO, UserData, StarData, LeaderBoardData } from "./leaderboard-data.types"
+import { UserData, StarData, LeaderBoardData } from "./leaderboard-data.types"
 
 export const mapToUserData = (data: LeaderBoardData[]) => { 
   var grouped = _.mapValues(_.groupBy(data, "username"), (list) =>
@@ -24,7 +25,7 @@ export const mapToUserData = (data: LeaderBoardData[]) => {
   return userDataArray;
 };
 
-export const mapToLeaderBoardData = (data: LeaderBoardEntryDTO[]) => {
+export const mapToLeaderBoardData = (data: ChallengeDTO[]) => {
   return (
     data
       // We do not care for anything that will not result in a score

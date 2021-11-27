@@ -1,5 +1,5 @@
 import { performAPIFetch } from "shared/utilities"
-import { LeaderBoardDTO } from "./leaderboard-data.types"
+import { LeaderBoardInfoDTO } from "./leaderboard-data.types"
 
 export const getLeaderBoardDataRequest = async (id: string, year: number) =>
-  await performAPIFetch<LeaderBoardDTO>(`leaderboard/${id}/${year}`);
+  await performAPIFetch<LeaderBoardInfoDTO>(`leaderboard/${id}/${year}`);
