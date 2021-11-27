@@ -4,15 +4,15 @@ import { LeaderBoardInfoDTO } from "./overview.types";
 
 const createStore = () => ({
   leaderBoards: [] as LeaderBoardInfoDTO[],
-  isLoading: false,
+  isLoading: true,
   setIsLoading(isLoading: boolean) {
     this.isLoading = isLoading;
   },
   setLeaderBoards(leaderboards: LeaderBoardInfoDTO[]) {
     this.leaderBoards = leaderboards;
   },
-  async onInitialize() {
-    this.refresh();
+  async onInitialize() { 
+    await this.refresh();
   },
 
   async refresh() {
