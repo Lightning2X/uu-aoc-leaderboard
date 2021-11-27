@@ -8,7 +8,7 @@ export interface MultiUseTableProps {
 
 export interface Column {
   id: string;
-  label: string;
+  label: unknown;
   minWidth?: number;
   align?: "right";
   format?: (value: unknown) => JSX.Element;
