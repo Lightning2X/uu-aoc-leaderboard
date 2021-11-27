@@ -5,17 +5,18 @@ export const calculateScores = (data: LeaderBoardData[]) => {
   var result = new Map<string, ScoreData>();
   // Sort on time taken to find the top scoring users
   var daysOne = _.sortBy(_.groupBy(data, "day"), ["timeTakenMsOne"], ["asc"]);
-  var daysTwo = _.sortBy(_.groupBy(data, "day"), ["timeTakenMsTwo"], ["asc"]);
+  var daysTwo = _.sortBy(_.groupBy(data.filter(x => !!x.starTwo), "day"), ["timeTakenMsTwo"], ["asc"]);
 
   // Map to scores per day per star one
   var scoresPerDayOne = daysOne.map((day) =>
     day.map((x, ind) => {
       return {
+        day: x.day,
+        username: x.username,
         score: day.length - ind,
         timeTakenMsOne: x.timeTakenMsOne,
         timeTakenMsTwo: null,
         totalTimeTakenMs: null,
-        username: x.username,
       } as ScoreDataUserName;
     })
   );
@@ -24,16 +25,17 @@ export const calculateScores = (data: LeaderBoardData[]) => {
   var scoresPerDayTwo = daysTwo.map((day) =>
     day.map((x, ind) => {
       return {
+        day: x.day,
+        username: x.username,
         score: day.length - ind,
         timeTakenMsOne: null,
         timeTakenMsTwo: x.timeTakenMsTwo,
-        username: x.username,
         // If star two hasnt been solved, the total time is star one
         totalTimeTakenMs: x.starTwo ? x.timeTakenMsTwo : x.timeTakenMsOne,
       } as ScoreDataUserName;
     })
   );
-
+ 
   // Map the first results (of star one) into the result Dictionary
   scoresPerDayOne.forEach((day) =>
     day.forEach((x) => {

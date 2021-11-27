@@ -45,4 +45,5 @@ export interface ScoreData {
 
 export interface ScoreDataUserName extends ScoreData {
   username: string;
+  day: number;
 }
