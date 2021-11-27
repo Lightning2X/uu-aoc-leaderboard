@@ -23,6 +23,7 @@ export const overviewLocalStore = () => ({
     const response = await getAllLeaderBoards(); 
     if (!response.success) { 
       this.setIsError(true);
+      return;
     }
     const result = response.result;
     this.setLeaderBoards(result);

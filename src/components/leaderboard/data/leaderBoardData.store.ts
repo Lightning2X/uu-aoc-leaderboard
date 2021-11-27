@@ -29,6 +29,7 @@ export const leaderBoardDataLocalStore = () => ({
     var response = await getLeaderBoardDataRequest(id, this.year);
     if (!response.success) {
       this.setIsError(true)
+      return;
     } 
     const result = response.result
     this.setName(result.name);
