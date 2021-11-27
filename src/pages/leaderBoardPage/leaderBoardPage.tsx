@@ -1,23 +1,28 @@
+import { leaderBoardDataLocalStore } from "components/leaderboard/data/leaderBoardData.store";
 import LeaderBoardTable from "components/leaderboard/table/leaderboard-table";
-import { overviewStore } from "components/overview/overview.store";
 import { PageNav } from "components/page-nav/page-nav";
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { withObserver } from "shared/stores";
+import { useStore, withObserver } from "shared/stores";
 import { IDParams } from "shared/types/idparams";
 import styles from "../page.module.scss";
 
 function LeaderBoardPage() {
   const { id } = useParams<IDParams>();
+
+  const { getLeaderBoardData, name, userData, isLoading } = useStore(
+    leaderBoardDataLocalStore
+  );
+
+  useEffect(() => {
+    getLeaderBoardData(id);
+  }, [getLeaderBoardData, id]);
+
   return (
     <div className={styles["page-container"]}>
       <PageNav />
-      <h1>
-        {!overviewStore.isLoading
-          ? overviewStore.leaderBoards.find((x) => x.id === id).name
-          : ""}
-      </h1>
-      <LeaderBoardTable id={id} />
+      <h1>{name}</h1>
+      <LeaderBoardTable userData={userData} isLoading={isLoading} />
     </div>
   );
 }

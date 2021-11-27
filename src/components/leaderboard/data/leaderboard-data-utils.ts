@@ -1,6 +1,6 @@
 import _ from "lodash"
 import { calculateScores } from "./calculatescores"
-import { LeaderBoardDTO, UserData, StarData, LeaderBoardData } from "./leaderboard-data.types"
+import { LeaderBoardEntryDTO, UserData, StarData, LeaderBoardData } from "./leaderboard-data.types"
 
 export const mapToUserData = (data: LeaderBoardData[]) => { 
   var grouped = _.mapValues(_.groupBy(data, "username"), (list) =>
@@ -24,7 +24,7 @@ export const mapToUserData = (data: LeaderBoardData[]) => {
   return userDataArray;
 };
 
-export const mapToLeaderBoardData = (data: LeaderBoardDTO[]) => {
+export const mapToLeaderBoardData = (data: LeaderBoardEntryDTO[]) => {
   return (
     data
       // We do not care for anything that will not result in a score

@@ -2,8 +2,8 @@ import { API_URL } from "shared/constants";
 
 export async function extractData<DataType>(
   response: Promise<Response>
-): Promise<DataType[]> {
-  return (await (await response).json()) as unknown as DataType[];
+): Promise<DataType> {
+  return (await (await response).json()) as unknown as DataType;
 }
 
 export async function performAPIFetch<DataType>(path: string) {
