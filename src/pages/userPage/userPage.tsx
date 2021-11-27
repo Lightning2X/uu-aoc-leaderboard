@@ -20,7 +20,7 @@ function UserPage() {
   return (
     <div className={styles["page-container"]}>
       <PageNav />
-      <h1>{userInfo.username}</h1>
+      <h1>{userInfo ? userInfo.username : null}</h1>
       <UserPageContent
         userInfo={userInfo}
         isError={isError}

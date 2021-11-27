@@ -2,7 +2,7 @@ import { getUserDataRequest } from "./user.repository"
 import { UserInfoDTO } from "./user.types"
 
 export const userLocalStore = () => ({
-  isLoading: false,
+  isLoading: true,
   isError: false,
   year: 2020,
   userInfo: null as UserInfoDTO,

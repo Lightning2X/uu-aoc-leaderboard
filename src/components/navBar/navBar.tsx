@@ -1,5 +1,5 @@
 import { AppBar, Box, Button, IconButton, Toolbar } from "@material-ui/core";
-import { AlternateEmail, GitHub, Home } from "@material-ui/icons";
+import { AlternateEmail, Code, Home } from "@material-ui/icons";
 import React from "react";
 import styles from "./navBar.module.scss";
 
@@ -22,7 +22,7 @@ function NavBar() {
             onClick={() =>
               window.open("https://github.com/Lightning2X/uu-aoc-leaderboard")
             }
-            startIcon={<GitHub className={"menu-icon"} />}
+            startIcon={<Code className={"menu-icon"} />}
           >
             Source
           </Button>

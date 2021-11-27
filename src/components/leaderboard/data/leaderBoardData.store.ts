@@ -7,7 +7,7 @@ export const leaderBoardDataLocalStore = () => ({
   leaderBoardData: [] as LeaderBoardData[],
   userData: [] as UserData[],
   year: 2020,
-  isLoading: false,
+  isLoading: true,
   isError: false,
   setIsLoading(isLoading: boolean) {
     this.isLoading = isLoading;

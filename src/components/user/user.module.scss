@@ -1,0 +1,17 @@
+.content { 
+display: flex;
+  align-items: center; 
+  text-align: center;
+  flex-direction: column; 
+  height: auto;
+}
+
+.profile-picture {
+    border-radius: 50%;
+    width: 10em;
+    height: 10em;
+}
+
+.github-button {
+    margin-top: 1em;
+}

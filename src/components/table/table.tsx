@@ -8,6 +8,7 @@ import {
   TablePagination,
   TableRow,
 } from "@material-ui/core";
+import PlaceHolder from "components/placeholder/placeholder";
 import React from "react";
 import { useStore, withObserver } from "shared/stores";
 import styles from "./table.module.scss";
@@ -19,16 +20,11 @@ function MultiUseTable(props: MultiUseTableProps) {
 
   const { page, rowsPerPage, setPage, setRowsPerPage } =
     useStore(tableLocalStore);
-  if (isError) {
-    return (
-      <h1 style={{ color: "red" }}>
-        An Error has occurred, please try again later
-      </h1>
-    );
+
+  if (isError || isLoading) {
+    return <PlaceHolder isError={isError} isLoading={isLoading} />;
   }
-  if (isLoading) {
-    return <img src="/loading.png" className="svgLoader" alt="loading"></img>;
-  }
+
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
