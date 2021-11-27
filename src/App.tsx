@@ -9,6 +9,7 @@ import {
 import "fontsource-roboto";
 import LandingPage from "pages/landingPage/landingPage";
 import LeaderBoardPage from "pages/leaderBoardPage/leaderBoardPage";
+import UserPage from "pages/userPage/userPage";
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.scss";
@@ -49,6 +50,9 @@ function App() {
             <Switch>
               <Route path="/leaderboard/:id">
                 <LeaderBoardPage />
+              </Route>
+              <Route path="/user/:id">
+                <UserPage />
               </Route>
               <Route path="/">
                 <LandingPage />

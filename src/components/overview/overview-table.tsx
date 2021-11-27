@@ -9,7 +9,7 @@ function OverviewTable() {
   const { isError, isLoading, leaderBoards } = useStore(overviewLocalStore);
   const history = useHistory();
   const onRowClick = (row: any) => {
-    history.push(`leaderboard/${row.id}`);
+    history.push(`/leaderboard/${row.id}`);
   };
   const columns: Column[] = [
     { id: "name", label: "Name", minWidth: 75 },

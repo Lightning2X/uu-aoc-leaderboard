@@ -1,5 +1,5 @@
 import _ from "lodash"
-import { LeaderBoardData, ScoreData, ScoreDataUserName } from "./leaderboard-data.types"
+import { LeaderBoardData, ScoreData, ScoreDataUserId } from "./leaderboard-data.types"
 
 export const calculateScores = (data: LeaderBoardData[]) => { 
   var result = new Map<string, ScoreData>();
@@ -12,12 +12,12 @@ export const calculateScores = (data: LeaderBoardData[]) => {
     day.map((x, ind) => {
       return {
         day: x.day,
-        username: x.username,
+        userid: x.userid,
         score: day.length - ind,
         timeTakenMsOne: x.timeTakenMsOne,
         timeTakenMsTwo: null,
         totalTimeTakenMs: null,
-      } as ScoreDataUserName;
+      } as ScoreDataUserId;
     })
   );
 
@@ -26,13 +26,13 @@ export const calculateScores = (data: LeaderBoardData[]) => {
     day.map((x, ind) => {
       return {
         day: x.day,
-        username: x.username,
+        userid: x.userid,
         score: day.length - ind,
         timeTakenMsOne: null,
         timeTakenMsTwo: x.timeTakenMsTwo,
         // If star two hasnt been solved, the total time is star one
         totalTimeTakenMs: x.starTwo ? x.timeTakenMsTwo : x.timeTakenMsOne,
-      } as ScoreDataUserName;
+      } as ScoreDataUserId;
     })
   );
  
@@ -40,13 +40,13 @@ export const calculateScores = (data: LeaderBoardData[]) => {
   scoresPerDayOne.forEach((day) =>
     day.forEach((x) => {
       var entry =
-        result.get(x.username) ??
+        result.get(x.userid) ??
         ({ score: 0, timeTakenMsOne: 0, timeTakenMsTwo: 0, totalTimeTakenMs: 0 } as ScoreData);
-      result.set(x.username, {
+      result.set(x.userid, {
         score: entry.score + x.score,
         timeTakenMsOne: entry.timeTakenMsOne + x.timeTakenMsOne,
         timeTakenMsTwo: 0,
-        totalTimeTakenMs: 0
+        totalTimeTakenMs: 0,
       });
     })
   );
@@ -54,8 +54,9 @@ export const calculateScores = (data: LeaderBoardData[]) => {
   // Map the second results (of star two) into the result Dictionary
   scoresPerDayTwo.forEach((day) =>
     day.forEach((x) => {
-      var { score, timeTakenMsOne, timeTakenMsTwo, totalTimeTakenMs } = result.get(x.username);
-      result.set(x.username, {
+      var { score, timeTakenMsOne, timeTakenMsTwo, totalTimeTakenMs } =
+        result.get(x.userid);
+      result.set(x.userid, {
         score: x.score + score,
         timeTakenMsOne,
         timeTakenMsTwo: timeTakenMsTwo + x.timeTakenMsTwo,

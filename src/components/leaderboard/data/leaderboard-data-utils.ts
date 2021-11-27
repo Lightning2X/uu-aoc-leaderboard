@@ -4,17 +4,18 @@ import { calculateScores } from "./calculatescores"
 import { UserData, StarData, LeaderBoardData } from "./leaderboard-data.types"
 
 export const mapToUserData = (data: LeaderBoardData[]) => { 
-  var grouped = _.mapValues(_.groupBy(data, "username"), (list) =>
-    list.map((user) => _.omit(user, "username"))
-  );
+  var grouped = _.mapValues(_.groupBy(data, "userid"), (list) =>
+    list.map((user) => _.omit(user, "userid"))
+  ); 
   const scoreMap = calculateScores(data);
   var userDataArray = [] as UserData[];
   Object.entries(grouped).forEach((userEntry) => {
     const stars = userEntry[1].map((x) => {
       return { day: x.day, one: !!x.starOne, two: !!x.starTwo } as StarData;
-    });
+    }); 
     const row: UserData = {
-      user: userEntry[0],
+      userid: userEntry[0],
+      username: userEntry[1][0].username,
       stars: _.sortBy(stars, ["day"], ["asc"]),
       score: scoreMap.get(userEntry[0])?.score,
       totalTime: scoreMap.get(userEntry[0])?.totalTimeTakenMs,
@@ -38,6 +39,7 @@ export const mapToLeaderBoardData = (data: ChallengeDTO[]) => {
           day: x.day,
           year: x.year,
           username: x.username,
+          userid: x.userid,
           starOne,
           starTwo,
           startTime,

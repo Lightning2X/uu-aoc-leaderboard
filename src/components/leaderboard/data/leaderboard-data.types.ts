@@ -1,7 +1,8 @@
 import { ChallengeDTO } from "shared/types/dto"
 
 export interface UserData {
-  user: string;
+  username: string;
+  userid: string;
   stars: StarData[];
   totalTime: number;
   score: number;
@@ -22,6 +23,7 @@ export interface LeaderBoardData {
   year: number;
   day: number;
   username: string;
+  userid: string
   startTime: Date;
   starOne: Date;
   starTwo: Date;
@@ -36,7 +38,7 @@ export interface ScoreData {
   score: number;
 }
 
-export interface ScoreDataUserName extends ScoreData {
-  username: string;
+export interface ScoreDataUserId extends ScoreData {
+  userid: string;
   day: number;
 }
