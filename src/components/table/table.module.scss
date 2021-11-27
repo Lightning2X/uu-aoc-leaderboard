@@ -3,7 +3,6 @@
 .theme-paper { 
     background-color: $theme-secondary;
     min-width: 50%;
-    overflow: hidden;
 }
 
 .theme-table-header-row { 
@@ -28,7 +27,9 @@
 }
 
 .theme-table-cell { 
-    color: inherit;
+    color: inherit; 
+    word-break: break-word;
+    word-wrap: break-word;
     background-color: inherit;
     border-bottom-color: $theme-primary;
 }
