@@ -9,14 +9,7 @@ export const calculateScores = (data: ChallengeData[]) => {
   var result = new Map<string, ScoreData>();
   // Sort on time taken to find the top scoring users
   var daysOne = _.sortBy(_.groupBy(data, "day"), ["timeTakenMsOne"], ["asc"]);
-  var daysTwo = _.sortBy(
-    _.groupBy(
-      data.filter((x) => !!x.starTwo),
-      "day"
-    ),
-    ["timeTakenMsTwo"],
-    ["asc"]
-  );
+  var daysTwo = _.sortBy(_.groupBy(data.filter((x) => !!x.starTwo), "day"), ["timeTakenMsTwo"], ["asc"]);
 
   // Map to scores per day per star one
   var scoresPerDayOne = daysOne.map((day) =>
