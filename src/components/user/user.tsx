@@ -2,6 +2,7 @@ import { Button } from "@material-ui/core";
 import { GitHub } from "@material-ui/icons";
 import PlaceHolder from "components/placeholder/placeholder";
 import StarChart from "./star-chart/star-chart";
+import StarList from "./star-list/star-list";
 import styles from "./user.module.scss";
 import { UserPageContentProps } from "./user.types";
 function UserPageContent(props: UserPageContentProps) {
@@ -9,7 +10,11 @@ function UserPageContent(props: UserPageContentProps) {
   if (isError || isLoading) {
     return <PlaceHolder isError={isError} isLoading={isLoading} />;
   }
-  console.log(userInfo.githubPage);
+
+  const getChartDisplay = (chart: JSX.Element) => {
+    return userInfo.challenges.length ? chart : <h4>No data yet</h4>;
+  };
+
   return (
     <div className={styles.content}>
       <img
@@ -26,12 +31,10 @@ function UserPageContent(props: UserPageContentProps) {
       >
         Github profile
       </Button>
+      <h3 className={styles.element}>Stars obtained: </h3>
+      {getChartDisplay(<StarList data={userInfo.challenges} />)}
       <h3 className={styles.element}>Minutes per Star:</h3>
-      {userInfo.challenges.length ? (
-        <StarChart data={userInfo.challenges} />
-      ) : (
-        <h4>No data yet</h4>
-      )}
+      {getChartDisplay(<StarChart data={userInfo.challenges} />)}
     </div>
   );
 }
