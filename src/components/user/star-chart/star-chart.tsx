@@ -7,22 +7,33 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { useMediaQueryContext } from "shared/utilities/useMediaQuery";
 import { mapToChartdata as mapToChartData } from "./star-chart-utils";
 import { StarChartProps } from "./star-chart.types";
 function StarChart(props: StarChartProps) {
   const { data, className } = props;
+  const { mobile } = useMediaQueryContext();
 
+  const DESKTOP_WIDTH = 750;
+  const DESKTOP_HEIGHT = 400;
+
+  const getSize = (size: number) => {
+    if (mobile) {
+      return size / 2;
+    }
+    return size;
+  };
   return (
     <LineChart
       className={className}
-      width={500}
-      height={300}
+      width={getSize(DESKTOP_WIDTH)}
+      height={getSize(DESKTOP_HEIGHT)}
       data={mapToChartData(data)}
       margin={{
-        top: 5,
-        right: 30,
-        left: 20,
-        bottom: 5,
+        top: 15,
+        right: 10,
+        left: 10,
+        bottom: 15,
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />

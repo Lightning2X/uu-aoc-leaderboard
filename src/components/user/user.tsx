@@ -1,6 +1,6 @@
 import { Button } from "@material-ui/core";
 import { GitHub } from "@material-ui/icons";
-import PlaceHolder from "components/placeholder/placeholder"; 
+import PlaceHolder from "components/placeholder/placeholder";
 import StarChart from "./star-chart/star-chart";
 import styles from "./user.module.scss";
 import { UserPageContentProps } from "./user.types";
@@ -27,7 +27,11 @@ function UserPageContent(props: UserPageContentProps) {
         Github profile
       </Button>
       <h3 className={styles.element}>Minutes per Star:</h3>
-      <StarChart data={userInfo.challenges} />
+      {userInfo.challenges.length ? (
+        <StarChart data={userInfo.challenges} />
+      ) : (
+        <h4>No data yet</h4>
+      )}
     </div>
   );
 }

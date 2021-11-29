@@ -12,6 +12,10 @@ import LeaderBoardPage from "pages/leaderBoardPage/leaderBoardPage";
 import UserPage from "pages/userPage/userPage";
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  MediaQueryContext,
+  useMediaQuery,
+} from "shared/utilities/useMediaQuery";
 import "./App.scss";
 import Footer from "./components/footer/footer";
 import NavBar from "./components/navBar/navBar";
@@ -42,25 +46,27 @@ function App() {
   return (
     <StylesProvider injectFirst>
       <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <div className="app">
-          <NavBar />
-          <Footer />
-          <header className="App-header"></header>
-          <Router>
-            <Switch>
-              <Route path="/leaderboard/:id">
-                <LeaderBoardPage />
-              </Route>
-              <Route path="/user/:id">
-                <UserPage />
-              </Route>
-              <Route path="/">
-                <LandingPage />
-              </Route>
-            </Switch>
-          </Router>
-        </div>
+        <MediaQueryContext.Provider value={useMediaQuery()}>
+          <CssBaseline />
+          <div className="app">
+            <NavBar />
+            <Footer />
+            <header className="App-header"></header>
+            <Router>
+              <Switch>
+                <Route path="/leaderboard/:id">
+                  <LeaderBoardPage />
+                </Route>
+                <Route path="/user/:id">
+                  <UserPage />
+                </Route>
+                <Route path="/">
+                  <LandingPage />
+                </Route>
+              </Switch>
+            </Router>
+          </div>
+        </MediaQueryContext.Provider>
       </ThemeProvider>
     </StylesProvider>
   );
