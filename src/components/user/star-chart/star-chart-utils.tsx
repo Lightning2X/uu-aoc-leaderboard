@@ -14,7 +14,9 @@ export const mapToChartdata = (data: ChallengeDTO[]) => {
         return {
           day: x.day,
           star1: msToMin(getTimeDifference(startTime, starOne)).toFixed(2),
-          star2: msToMin(getTimeDifference(startTime, starTwo)).toFixed(2),
+          star2: starTwo
+            ? msToMin(getTimeDifference(startTime, starTwo)).toFixed(2)
+            : null,
         } as ChartData;
       })
   );
