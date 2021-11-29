@@ -24,8 +24,7 @@ function StarList(props: StarListProps) {
           flagDate(new Date(userDay.starTwo), year),
       });
     }
-
-    console.log(result);
+    
     return result;
   };
 
