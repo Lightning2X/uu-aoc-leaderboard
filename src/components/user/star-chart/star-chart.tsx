@@ -14,12 +14,12 @@ function StarChart(props: StarChartProps) {
   const { data, className } = props;
   const { mobile } = useMediaQueryContext();
 
-  const DESKTOP_WIDTH = 750;
-  const DESKTOP_HEIGHT = 400;
+  const DESKTOP_WIDTH = 900;
+  const DESKTOP_HEIGHT = 600;
 
   const getSize = (size: number) => {
     if (mobile) {
-      return size / 2;
+      return size / 3;
     }
     return size;
   };
@@ -30,10 +30,10 @@ function StarChart(props: StarChartProps) {
       height={getSize(DESKTOP_HEIGHT)}
       data={mapToChartData(data)}
       margin={{
-        top: 15,
-        right: 10,
-        left: 10,
-        bottom: 15,
+        top: 5,
+        right: 0,
+        left: 0,
+        bottom: 20,
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
