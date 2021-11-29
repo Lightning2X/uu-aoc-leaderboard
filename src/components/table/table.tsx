@@ -46,6 +46,7 @@ function MultiUseTable(props: MultiUseTableProps) {
             hover
             role="checkbox"
             tabIndex={-1}
+            style={{ cursor: onRowClick ? "pointer" : "inherit"}}
             onClick={onRowClick ? () => onRowClick(row) : undefined}
             key={row.id}
           >
@@ -56,7 +57,6 @@ function MultiUseTable(props: MultiUseTableProps) {
                   className={styles["theme-table-cell"]}
                   key={column.id}
                   align={column.align}
-                  style={{ backgroundColor: "#393e46" }}
                 >
                   {column.format ? column.format(value) : value}
                 </TableCell>
