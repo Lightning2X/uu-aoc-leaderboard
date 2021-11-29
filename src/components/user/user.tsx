@@ -6,7 +6,7 @@ import StarList from "./star-list/star-list";
 import styles from "./user.module.scss";
 import { UserPageContentProps } from "./user.types";
 function UserPageContent(props: UserPageContentProps) {
-  const { isError, isLoading, userInfo } = props;
+  const { isError, isLoading, userInfo, year } = props;
   if (isError || isLoading) {
     return <PlaceHolder isError={isError} isLoading={isLoading} />;
   }
@@ -32,7 +32,7 @@ function UserPageContent(props: UserPageContentProps) {
         Github profile
       </Button>
       <h3 className={styles.element}>Stars obtained: </h3>
-      {getChartDisplay(<StarList data={userInfo.challenges} />)}
+      {getChartDisplay(<StarList data={userInfo.challenges} year={year} />)}
       <h3 className={styles.element}>Minutes per Star:</h3>
       {getChartDisplay(<StarChart data={userInfo.challenges} />)}
     </div>

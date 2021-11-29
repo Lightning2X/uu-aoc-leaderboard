@@ -25,6 +25,7 @@ function UserPage() {
       <h1>{userInfo ? userInfo.username : null}</h1>
       <UserPageContent
         userInfo={userInfo}
+        year = {appGlobalStore.year}
         isError={isError}
         isLoading={isLoading}
       />
