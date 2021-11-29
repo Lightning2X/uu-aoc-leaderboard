@@ -10,9 +10,7 @@ function PlaceHolder(props: PlaceHolderProps) {
     );
   }
   if (isLoading) {
-    return (
-      <img src="public/loading.png" className="svgLoader" alt="loading"></img>
-    );
+    return <img src="/loading.png" className="svgLoader" alt="loading"></img>;
   }
 
   return null;

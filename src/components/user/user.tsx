@@ -1,7 +1,6 @@
 import { Button } from "@material-ui/core";
 import { GitHub } from "@material-ui/icons";
-import PlaceHolder from "components/placeholder/placeholder";
-import defaultProfilePic from "shared/media/default_profile.png";
+import PlaceHolder from "components/placeholder/placeholder"; 
 import StarChart from "./star-chart/star-chart";
 import styles from "./user.module.scss";
 import { UserPageContentProps } from "./user.types";
@@ -15,7 +14,7 @@ function UserPageContent(props: UserPageContentProps) {
     <div className={styles.content}>
       <img
         className={styles["profile-picture"]}
-        src={userInfo.profilePic ?? defaultProfilePic}
+        src={userInfo.profilePic ?? "/default-profile-pic.png"}
         alt={"Github profile img"}
       />
       <Button
