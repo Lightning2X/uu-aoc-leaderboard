@@ -1,11 +1,22 @@
-import _ from "lodash"
-import { ChallengeData, ScoreData, ScoreDataUserId } from "./leaderboard-data.types"
+import _ from "lodash";
+import {
+  ChallengeData,
+  ScoreData,
+  ScoreDataUserId,
+} from "./leaderboard-data.types";
 
-export const calculateScores = (data: ChallengeData[]) => { 
+export const calculateScores = (data: ChallengeData[]) => {
   var result = new Map<string, ScoreData>();
   // Sort on time taken to find the top scoring users
   var daysOne = _.sortBy(_.groupBy(data, "day"), ["timeTakenMsOne"], ["asc"]);
-  var daysTwo = _.sortBy(_.groupBy(data.filter(x => !!x.starTwo), "day"), ["timeTakenMsTwo"], ["asc"]);
+  var daysTwo = _.sortBy(
+    _.groupBy(
+      data.filter((x) => !!x.starTwo),
+      "day"
+    ),
+    ["timeTakenMsTwo"],
+    ["asc"]
+  );
 
   // Map to scores per day per star one
   var scoresPerDayOne = daysOne.map((day) =>
@@ -15,7 +26,7 @@ export const calculateScores = (data: ChallengeData[]) => {
         userid: x.userid,
         score: day.length - ind,
         timeTakenMsOne: x.timeTakenMsOne,
-        timeTakenMsTwo: null,
+        timeTakenMsTwo: x.timeTakenMsTwo,
         totalTimeTakenMs: null,
       } as ScoreDataUserId;
     })
@@ -28,42 +39,52 @@ export const calculateScores = (data: ChallengeData[]) => {
         day: x.day,
         userid: x.userid,
         score: day.length - ind,
-        timeTakenMsOne: null,
+        timeTakenMsOne: x.timeTakenMsOne,
         timeTakenMsTwo: x.timeTakenMsTwo,
-        // If star two hasnt been solved, the total time is star one
-        totalTimeTakenMs: x.starTwo ? x.timeTakenMsTwo : x.timeTakenMsOne,
+        totalTimeTakenMs: null,
       } as ScoreDataUserId;
     })
   );
- 
+
+  console.log(scoresPerDayTwo);
+
   // Map the first results (of star one) into the result Dictionary
   scoresPerDayOne.forEach((day) =>
     day.forEach((x) => {
       var entry =
         result.get(x.userid) ??
-        ({ score: 0, timeTakenMsOne: 0, timeTakenMsTwo: 0, totalTimeTakenMs: 0 } as ScoreData);
+        ({
+          score: 0,
+          timeTakenMsOne: 0,
+          timeTakenMsTwo: 0,
+          totalTimeTakenMs: 0,
+        } as ScoreData);
       result.set(x.userid, {
         score: entry.score + x.score,
         timeTakenMsOne: entry.timeTakenMsOne + x.timeTakenMsOne,
         timeTakenMsTwo: 0,
-        totalTimeTakenMs: 0,
+        totalTimeTakenMs: entry.totalTimeTakenMs + x.timeTakenMsOne,
       });
     })
   );
 
+
   // Map the second results (of star two) into the result Dictionary
   scoresPerDayTwo.forEach((day) =>
     day.forEach((x) => {
-      var { score, timeTakenMsOne, timeTakenMsTwo, totalTimeTakenMs } =
-        result.get(x.userid);
+      var entry = result.get(x.userid);
       result.set(x.userid, {
-        score: x.score + score,
-        timeTakenMsOne,
-        timeTakenMsTwo: timeTakenMsTwo + x.timeTakenMsTwo,
-        totalTimeTakenMs: totalTimeTakenMs + x.totalTimeTakenMs,
+        score: x.score + entry.score,
+        timeTakenMsOne: entry.timeTakenMsOne,
+        timeTakenMsTwo: entry.timeTakenMsTwo + x.timeTakenMsTwo,
+        // If star two hasnt been solved, the total time is star one
+        totalTimeTakenMs:
+          x.timeTakenMsTwo > 0
+            ? entry.totalTimeTakenMs + (x.timeTakenMsTwo - x.timeTakenMsOne)
+            : entry.totalTimeTakenMs,
       });
     })
-  ); 
+  );
 
   return result;
 };
