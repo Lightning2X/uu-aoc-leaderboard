@@ -37,3 +37,9 @@
 .theme-rows-per-page-list {
   background-color: $theme-secondary;
 }
+
+.no-results {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+}

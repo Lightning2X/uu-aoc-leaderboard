@@ -7,7 +7,9 @@ import {
   TableHead,
   TablePagination,
   TableRow,
+  Typography,
 } from "@material-ui/core";
+import { Help } from "@material-ui/icons";
 import PlaceHolder from "components/placeholder/placeholder";
 import React from "react";
 import { useStore, withObserver } from "shared/stores";
@@ -20,13 +22,23 @@ function MultiUseTable(props: MultiUseTableProps) {
   const { columns: inputColumns, data, isLoading, isError, onRowClick } = props;
 
   const { mobile } = useMediaQueryContext();
-  const columns = mobile ? inputColumns.filter((x) => x.mobile !== false) : inputColumns;
+  const columns = mobile
+    ? inputColumns.filter((x) => x.mobile !== false)
+    : inputColumns;
 
   const { page, rowsPerPage, setPage, setRowsPerPage } =
     useStore(tableLocalStore);
 
   if (isError || isLoading) {
     return <PlaceHolder isError={isError} isLoading={isLoading} />;
+  }
+
+  if (!data.length) {
+    return (
+      <Typography variant="h5" className={styles["no-results"]}>
+        <Help /> Sorry, no results. Please try another page or year
+      </Typography>
+    );
   }
 
   const handleChangePage = (event: unknown, newPage: number) => {
