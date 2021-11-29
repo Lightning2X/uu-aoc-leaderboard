@@ -1,2 +1,2 @@
-export * from "./performFetch"
-export * from "./timeUtils"
+export * from "./performFetch";
+export * from "./timeUtils";

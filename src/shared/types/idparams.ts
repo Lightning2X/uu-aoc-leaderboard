@@ -1,3 +1,3 @@
 export interface IDParams {
-    id: string
+  id: string;
 }

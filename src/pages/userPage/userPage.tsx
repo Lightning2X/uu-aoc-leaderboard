@@ -1,4 +1,4 @@
-import { appGlobalStore } from "app.store"
+import { appGlobalStore } from "app.store";
 import { PageNav } from "components/page-nav/page-nav";
 import UserPageContent from "components/user/user";
 import { userLocalStore } from "components/user/user.store";

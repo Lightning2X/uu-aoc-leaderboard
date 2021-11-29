@@ -1,5 +1,5 @@
-import { LeaderBoardDTO } from "shared/types/dto"
-import { getAllLeaderBoards } from "./overview.repository"; 
+import { LeaderBoardDTO } from "shared/types/dto";
+import { getAllLeaderBoards } from "./overview.repository";
 
 export const overviewLocalStore = () => ({
   leaderBoards: [] as LeaderBoardDTO[],
@@ -29,4 +29,4 @@ export const overviewLocalStore = () => ({
     this.setLeaderBoards(result);
     this.setIsLoading(false);
   },
-}); 
+});

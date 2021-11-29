@@ -1,22 +1,22 @@
-@import "../../shared/variables.scss"; 
+@import "../../shared/variables.scss";
 
 .footer {
-    z-index: 999;
-    position: fixed; 
-    bottom: 0; 
-    left: 0; 
-    right: 0;
+  z-index: 999;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
-.bottom-nav { 
-    color: $theme-header-text;
-    background-color: $theme-primary;
+.bottom-nav {
+  color: $theme-header-text;
+  background-color: $theme-primary;
 }
 
 .nav-action {
-    color: inherit
+  color: inherit;
 }
 
 .year {
-    font-weight: bold;
+  font-weight: bold;
 }

@@ -1,8 +1,8 @@
-import { ChallengeDTO } from "shared/types/dto"
+import { ChallengeDTO } from "shared/types/dto";
 
-export interface StarListProps{ 
-    data: ChallengeDTO[],
-    className?: string
+export interface StarListProps {
+  data: ChallengeDTO[];
+  className?: string;
 }
 
 export interface StarListData {

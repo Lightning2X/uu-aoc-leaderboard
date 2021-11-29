@@ -1,4 +1,4 @@
-import { ChallengeDTO } from "shared/types/dto"
+import { ChallengeDTO } from "shared/types/dto";
 
 export interface UserData {
   username: string;
@@ -16,21 +16,21 @@ export interface StarData {
 
 export interface LeaderBoardInfoDTO {
   name: string;
-  challenges: ChallengeDTO[]
+  challenges: ChallengeDTO[];
 }
 
 export interface ChallengeData {
   year: number;
   day: number;
   username: string;
-  userid: string
+  userid: string;
   startTime: Date;
   starOne: Date;
   starTwo: Date;
   timeTakenMsOne: number;
   timeTakenMsTwo: number;
 }
- 
+
 export interface ScoreData {
   timeTakenMsOne: number;
   timeTakenMsTwo: number;

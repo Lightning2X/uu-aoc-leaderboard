@@ -1,12 +1,12 @@
-import { appGlobalStore } from "app.store"
-import { mapToChallengeData, mapToUserData } from "./leaderboard-data-utils"
-import { ChallengeData, UserData } from "./leaderboard-data.types" 
-import { getLeaderBoardDataRequest } from "./leaderBoardData.repository"
+import { appGlobalStore } from "app.store";
+import { mapToChallengeData, mapToUserData } from "./leaderboard-data-utils";
+import { ChallengeData, UserData } from "./leaderboard-data.types";
+import { getLeaderBoardDataRequest } from "./leaderBoardData.repository";
 
 export const leaderBoardDataLocalStore = () => ({
   name: null as string,
   leaderBoardData: [] as ChallengeData[],
-  userData: [] as UserData[], 
+  userData: [] as UserData[],
   isLoading: true,
   isError: false,
   setIsLoading(isLoading: boolean) {
@@ -28,10 +28,10 @@ export const leaderBoardDataLocalStore = () => ({
     this.setIsLoading(true);
     var response = await getLeaderBoardDataRequest(id, appGlobalStore.year);
     if (!response.success) {
-      this.setIsError(true)
+      this.setIsError(true);
       return;
-    } 
-    const result = response.result
+    }
+    const result = response.result;
     this.setName(result.name);
     const leaderBoardData = mapToChallengeData(result.challenges);
     this.setLeaderBoardData(leaderBoardData);

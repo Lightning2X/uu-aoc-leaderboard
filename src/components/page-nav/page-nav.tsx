@@ -1,9 +1,9 @@
 import { Button } from "@material-ui/core";
 import { ArrowBack, ArrowForward } from "@material-ui/icons";
-import { useHistory } from "react-router"
-import styles from "./page-nav.module.scss"
+import { useHistory } from "react-router";
+import styles from "./page-nav.module.scss";
 export function PageNav() {
-    const history = useHistory();
+  const history = useHistory();
   return (
     <div>
       <Button

@@ -46,7 +46,7 @@ function MultiUseTable(props: MultiUseTableProps) {
             hover
             role="checkbox"
             tabIndex={-1}
-            style={{ cursor: onRowClick ? "pointer" : "inherit"}}
+            style={{ cursor: onRowClick ? "pointer" : "inherit" }}
             onClick={onRowClick ? () => onRowClick(row) : undefined}
             key={row.id}
           >

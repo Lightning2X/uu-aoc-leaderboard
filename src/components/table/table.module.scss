@@ -1,40 +1,39 @@
 @import "../../shared/variables.scss";
 
-.theme-paper { 
-    background-color: $theme-secondary;
-    min-width: 50%;
+.theme-paper {
+  background-color: $theme-secondary;
+  min-width: 50%;
 }
 
-.theme-table-header-row { 
-    color: $theme-text;
-    background-color: $theme-background;
+.theme-table-header-row {
+  color: $theme-text;
+  background-color: $theme-background;
 }
 
-.theme-table-header-cell { 
-    color: inherit;
-    font-weight: bold;
-    background-color: inherit;
-    border-bottom-color: $theme-primary;
+.theme-table-header-cell {
+  color: inherit;
+  font-weight: bold;
+  background-color: inherit;
+  border-bottom-color: $theme-primary;
 }
 
 .theme-table-body {
-    color: $theme-text;
-    background-color: $theme-primary;
+  color: $theme-text;
+  background-color: $theme-primary;
 }
 .theme-table-row {
-    color: $theme-text;
-    background-color: $theme-secondary;
+  color: $theme-text;
+  background-color: $theme-secondary;
 }
 
-.theme-table-cell { 
-    color: inherit; 
-    word-break: break-word;
-    word-wrap: break-word;
-    background-color: inherit;
-    border-bottom-color: $theme-primary;
+.theme-table-cell {
+  color: inherit;
+  word-break: break-word;
+  word-wrap: break-word;
+  background-color: inherit;
+  border-bottom-color: $theme-primary;
 }
 
-.theme-rows-per-page-list {  
-    background-color: $theme-secondary;
+.theme-rows-per-page-list {
+  background-color: $theme-secondary;
 }
-   

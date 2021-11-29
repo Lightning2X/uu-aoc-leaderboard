@@ -4,4 +4,6 @@
         ".vscode{,/**}"
     ],
     "editor.formatOnSave": true,
+    "editor.tabSize": 4,
+    "editor.detectIndentation": false
 }

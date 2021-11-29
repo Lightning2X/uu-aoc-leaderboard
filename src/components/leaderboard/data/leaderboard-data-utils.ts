@@ -1,19 +1,19 @@
-import _ from "lodash"
-import { ChallengeDTO } from "shared/types/dto"
-import { getTimeDifference } from "shared/utilities"
-import { calculateScores } from "./calculatescores"
-import { UserData, StarData, ChallengeData } from "./leaderboard-data.types"
+import _ from "lodash";
+import { ChallengeDTO } from "shared/types/dto";
+import { getTimeDifference } from "shared/utilities";
+import { calculateScores } from "./calculatescores";
+import { UserData, StarData, ChallengeData } from "./leaderboard-data.types";
 
-export const mapToUserData = (data: ChallengeData[]) => { 
+export const mapToUserData = (data: ChallengeData[]) => {
   var grouped = _.mapValues(_.groupBy(data, "userid"), (list) =>
     list.map((user) => _.omit(user, "userid"))
-  ); 
+  );
   const scoreMap = calculateScores(data);
   var userDataArray = [] as UserData[];
   Object.entries(grouped).forEach((userEntry) => {
     const stars = userEntry[1].map((x) => {
       return { day: x.day, one: !!x.starOne, two: !!x.starTwo } as StarData;
-    }); 
+    });
     const row: UserData = {
       userid: userEntry[0],
       username: userEntry[1][0].username,
@@ -50,5 +50,3 @@ export const mapToChallengeData = (data: ChallengeDTO[]) => {
       })
   );
 };
-
-

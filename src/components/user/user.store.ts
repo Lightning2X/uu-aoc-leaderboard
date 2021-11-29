@@ -1,6 +1,6 @@
-import { appGlobalStore } from "app.store"
-import { getUserDataRequest } from "./user.repository"
-import { UserInfoDTO } from "./user.types"
+import { appGlobalStore } from "app.store";
+import { getUserDataRequest } from "./user.repository";
+import { UserInfoDTO } from "./user.types";
 
 export const userLocalStore = () => ({
   isLoading: true,
@@ -11,18 +11,18 @@ export const userLocalStore = () => ({
   },
   setIsError(isError: boolean) {
     this.isError = isError;
-  }, 
+  },
   setUserInfo(userInfo: UserInfoDTO) {
-      this.userInfo = userInfo;
+    this.userInfo = userInfo;
   },
   async getUserData(id: string) {
-      this.setIsLoading(true)
-      var response = await getUserDataRequest(id, appGlobalStore.year);
-       if (!response.success) {
-         this.setIsError(true);
-         return;
-       } 
-      this.setUserInfo(response.result);
-      this.setIsLoading(false)
-  }
+    this.setIsLoading(true);
+    var response = await getUserDataRequest(id, appGlobalStore.year);
+    if (!response.success) {
+      this.setIsError(true);
+      return;
+    }
+    this.setUserInfo(response.result);
+    this.setIsLoading(false);
+  },
 });

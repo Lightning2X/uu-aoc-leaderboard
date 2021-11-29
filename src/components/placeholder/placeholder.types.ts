@@ -1,4 +1,4 @@
 export interface PlaceHolderProps {
-    isError: boolean;
-    isLoading: boolean;
+  isError: boolean;
+  isLoading: boolean;
 }

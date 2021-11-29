@@ -1,12 +1,7 @@
-import { UserData } from "../data/leaderboard-data.types"
+import { UserData } from "../data/leaderboard-data.types";
 
-export interface LeaderBoardTableProps  { 
-  userData: UserData[]
-  isLoading: boolean
-  isError: boolean
+export interface LeaderBoardTableProps {
+  userData: UserData[];
+  isLoading: boolean;
+  isError: boolean;
 }
-
-
-
-
-
