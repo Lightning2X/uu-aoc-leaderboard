@@ -2,8 +2,8 @@ import { Star, StarBorder } from "@material-ui/icons";
 import { AOC_DAYS } from "shared/constants";
 import { ChallengeDTO } from "shared/types/dto";
 import { flagDate } from "shared/utilities";
+import styles from "./star-list.module.scss";
 import { StarListData, StarListProps } from "./star-list.types";
-import styles from "./star-list.module.scss"
 function StarList(props: StarListProps) {
   const { data, className, year } = props;
 
@@ -20,7 +20,8 @@ function StarList(props: StarListProps) {
         star1: !!userDay.starOne,
         star2: !!userDay.starTwo,
         flagged:
-          flagDate(new Date(userDay.starOne), year) || flagDate(new Date(userDay.starTwo), year),
+          flagDate(new Date(userDay.starOne), year) ||
+          flagDate(new Date(userDay.starTwo), year),
       });
     }
 
@@ -28,7 +29,7 @@ function StarList(props: StarListProps) {
     return result;
   };
 
-  const starListData = getStarListData(data)
+  const starListData = getStarListData(data);
 
   const getColor = (starListData: StarListData) => {
     if (starListData.flagged && starListData.star2) {
@@ -51,12 +52,17 @@ function StarList(props: StarListProps) {
       return x.star1 ? <Star style={{ color: getColor(x) }} /> : <StarBorder />;
     });
   };
- 
 
-  return <div className={className}>
+  return (
+    <div className={className}>
       {getStarList(data)}
-      {starListData.some(x => x.flagged) ? <h4 className={styles.warning}>{`This user has gained any or all of his stars after ${year}, these stars are marked in red`}</h4> : null}
-  </div>;
+      {starListData.some((x) => x.flagged) ? (
+        <h4
+          className={styles.warning}
+        >{`This user has gained stars after ${year}, these stars are marked in red`}</h4>
+      ) : null}
+    </div>
+  );
 }
 
 export default StarList;
