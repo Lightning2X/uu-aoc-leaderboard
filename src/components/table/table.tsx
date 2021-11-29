@@ -11,12 +11,16 @@ import {
 import PlaceHolder from "components/placeholder/placeholder";
 import React from "react";
 import { useStore, withObserver } from "shared/stores";
+import { useMediaQueryContext } from "shared/utilities/useMediaQuery";
 import styles from "./table.module.scss";
 import { tableLocalStore } from "./table.store";
 import { MultiUseTableProps } from "./table.types";
 
 function MultiUseTable(props: MultiUseTableProps) {
-  const { columns, data, isLoading, isError, onRowClick } = props;
+  const { columns: inputColumns, data, isLoading, isError, onRowClick } = props;
+
+  const { mobile } = useMediaQueryContext();
+  const columns = mobile ? inputColumns.filter((x) => x.mobile !== false) : inputColumns;
 
   const { page, rowsPerPage, setPage, setRowsPerPage } =
     useStore(tableLocalStore);

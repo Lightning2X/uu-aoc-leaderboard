@@ -1,5 +1,5 @@
-import { Tooltip } from "@material-ui/core"
-import {  Flag, Star } from "@material-ui/icons";
+import { Tooltip } from "@material-ui/core";
+import { Flag, Star } from "@material-ui/icons";
 import MultiUseTable from "components/table/table";
 import { Column } from "components/table/table.types";
 import React from "react";
@@ -38,12 +38,14 @@ function LeaderBoardTable(props: LeaderBoardTableProps) {
       id: "stars",
       label: getStarLabel("silver"),
       minWidth: 30,
+      mobile: false,
       format: starTableFormatterOne,
     },
     {
       id: "stars",
       label: getStarLabel("gold"),
       minWidth: 30,
+      mobile: false,
       format: starTableFormatterTwo,
     },
     {
