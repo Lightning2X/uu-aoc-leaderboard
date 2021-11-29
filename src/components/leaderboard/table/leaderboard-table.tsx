@@ -1,9 +1,11 @@
-import { Star } from "@material-ui/icons";
+import { Tooltip } from "@material-ui/core"
+import {  Flag, Star } from "@material-ui/icons";
 import MultiUseTable from "components/table/table";
 import { Column } from "components/table/table.types";
 import React from "react";
 import { useHistory } from "react-router";
 import {
+  flagTableFormatter,
   miliSecondTableFormatter,
   starTableFormatterOne,
   starTableFormatterTwo,
@@ -14,8 +16,14 @@ function LeaderBoardTable(props: LeaderBoardTableProps) {
   const { userData, isLoading, isError } = props;
   const history = useHistory();
   const getStarLabel = (color: string) => {
+    return <Star className={styles.icon} style={{ color: color }} />;
+  };
+
+  const getFlagLabel = () => {
     return (
-      <Star className={styles["star-icon"]} style={{ color: color }}></Star>
+      <Tooltip title="This shows whether an user has completed any challenges after the official AOC date">
+        <Flag className={styles.icon} />
+      </Tooltip>
     );
   };
 
@@ -23,7 +31,7 @@ function LeaderBoardTable(props: LeaderBoardTableProps) {
     history.push(`/user/${row.userid}`);
   };
 
-  const columns: Column[] = [
+  const standardColumns: Column[] = [
     { id: "username", label: "Name", minWidth: 100 },
     { id: "score", label: "Score", minWidth: 30 },
     {
@@ -45,6 +53,17 @@ function LeaderBoardTable(props: LeaderBoardTableProps) {
       format: miliSecondTableFormatter,
     },
   ];
+
+  const columns = userData.some((x) => x.flagged)
+    ? standardColumns.concat([
+        {
+          id: "flagged",
+          label: getFlagLabel(),
+          minWidth: 10,
+          format: flagTableFormatter,
+        },
+      ])
+    : standardColumns;
 
   return (
     <MultiUseTable

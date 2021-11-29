@@ -20,7 +20,7 @@ function StarList(props: StarListProps) {
         star1: !!userDay.starOne,
         star2: !!userDay.starTwo,
         flagged:
-          flagDate(userDay.starOne, year) || flagDate(userDay.starTwo, year),
+          flagDate(new Date(userDay.starOne), year) || flagDate(new Date(userDay.starTwo), year),
       });
     }
 

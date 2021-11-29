@@ -22,6 +22,6 @@ export const msToMin = (ms: number) => {
   return _.divide(ms, 60000);
 };
 
-export const flagDate = (date: string, year: number) => {
-    return new Date(date).getUTCFullYear() > year
-}
+export const flagDate = (date: Date, year: number) => {
+  return date.getUTCFullYear() > year;
+};

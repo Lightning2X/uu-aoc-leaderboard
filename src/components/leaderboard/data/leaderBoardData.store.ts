@@ -35,7 +35,7 @@ export const leaderBoardDataLocalStore = () => ({
     this.setName(result.name);
     const leaderBoardData = mapToChallengeData(result.challenges);
     this.setLeaderBoardData(leaderBoardData);
-    this.setUserData(mapToUserData(leaderBoardData));
+    this.setUserData(mapToUserData(leaderBoardData, appGlobalStore.year));
     this.setIsLoading(false);
   },
 });

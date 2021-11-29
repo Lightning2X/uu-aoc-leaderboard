@@ -6,6 +6,7 @@ export interface UserData {
   stars: StarData[];
   totalTime: number;
   score: number;
+  flagged: boolean;
 }
 
 export interface StarData {
