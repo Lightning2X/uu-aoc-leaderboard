@@ -1,3 +1,4 @@
+import { appGlobalStore } from "app.store"
 import { PageNav } from "components/page-nav/page-nav";
 import UserPageContent from "components/user/user";
 import { userLocalStore } from "components/user/user.store";
@@ -15,7 +16,8 @@ function UserPage() {
 
   useEffect(() => {
     getUserData(id);
-  }, [getUserData, id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [getUserData, id, appGlobalStore.year]);
 
   return (
     <div className={styles["page-container"]}>

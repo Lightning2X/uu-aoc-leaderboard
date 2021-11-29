@@ -13,8 +13,8 @@ import UserPage from "pages/userPage/userPage";
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.scss";
+import Footer from "./components/footer/footer";
 import NavBar from "./components/navBar/navBar";
-
 // Create a theme instance.
 let theme = createTheme({
   palette: {
@@ -45,6 +45,7 @@ function App() {
         <CssBaseline />
         <div className="app">
           <NavBar />
+          <Footer />
           <header className="App-header"></header>
           <Router>
             <Switch>

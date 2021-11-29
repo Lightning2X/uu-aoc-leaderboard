@@ -1,3 +1,4 @@
+import { appGlobalStore } from "app.store";
 import { leaderBoardDataLocalStore } from "components/leaderboard/data/leaderBoardData.store";
 import LeaderBoardTable from "components/leaderboard/table/leaderboard-table";
 import { PageNav } from "components/page-nav/page-nav";
@@ -16,7 +17,8 @@ function LeaderBoardPage() {
 
   useEffect(() => {
     getLeaderBoardData(id);
-  }, [getLeaderBoardData, id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [getLeaderBoardData, id, appGlobalStore.year]);
 
   return (
     <div className={styles["page-container"]}>
