@@ -46,8 +46,6 @@ export const calculateScores = (data: ChallengeData[]) => {
     })
   );
 
-  console.log(scoresPerDayTwo);
-
   // Map the first results (of star one) into the result Dictionary
   scoresPerDayOne.forEach((day) =>
     day.forEach((x) => {
