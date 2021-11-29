@@ -38,6 +38,7 @@ let theme = createTheme({
       primary: "#eeeeee",
       secondary: "#eeeeee",
     },
+    type: "dark",
   },
 });
 theme = responsiveFontSizes(theme);
