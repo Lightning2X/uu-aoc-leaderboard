@@ -1,5 +1,9 @@
 @import "../../shared/variables.scss";
 
+.navBar {
+  z-index: 999;
+  position: fixed;
+}
 .button {
   color: $theme-header-text;
   margin: 5px;

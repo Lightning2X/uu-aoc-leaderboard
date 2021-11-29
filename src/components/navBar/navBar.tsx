@@ -5,7 +5,7 @@ import styles from "./navBar.module.scss";
 
 function NavBar() {
   return (
-    <AppBar position="static">
+    <AppBar className={styles.navBar}>
       <Toolbar>
         {/*Left side Icons*/}
         <Box display="flex" flexGrow={1}>
