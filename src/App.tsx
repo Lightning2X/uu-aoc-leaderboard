@@ -7,6 +7,7 @@ import {
   ThemeProvider,
 } from "@material-ui/core";
 import "fontsource-roboto";
+import AgreementPage from "pages/agreementPage/agreementPage";
 import LandingPage from "pages/landingPage/landingPage";
 import LeaderBoardPage from "pages/leaderBoardPage/leaderBoardPage";
 import UserPage from "pages/userPage/userPage";
@@ -60,6 +61,9 @@ function App() {
                 </Route>
                 <Route path="/user/:id">
                   <UserPage />
+                </Route>
+                <Route path="/agreement">
+                  <AgreementPage />
                 </Route>
                 <Route path="/">
                   <LandingPage />

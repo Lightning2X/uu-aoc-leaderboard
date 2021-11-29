@@ -8,6 +8,7 @@ function LandingPage() {
       <PageNav />
       <h1>Leaderboards</h1>
       <OverviewTable />
+      <a href={"/agreement"}>By using this site you agree to the gentlemen's agreement</a>
     </div>
   );
 }
