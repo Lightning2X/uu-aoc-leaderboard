@@ -3,7 +3,7 @@ import { asGlobalStore } from "shared/stores"
 const createStore = () => ({
   year: new Date().getUTCFullYear(),
   setYear(year: number) {
-      if(year > new Date().getUTCFullYear()) {
+      if(year < 2015 || year > new Date().getUTCFullYear()) {
           return;
       }
       this.year = year;
