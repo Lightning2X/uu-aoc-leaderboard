@@ -1,87 +1,55 @@
-import _ from "lodash";
-import {
-  ChallengeData,
-  ScoreData,
-  ScoreDataUserId,
-} from "./leaderboard-data.types";
+import { ChallengeData, ScoreData } from "./leaderboard-data.types";
 
 export const calculateScores = (data: ChallengeData[]) => {
-  var result = new Map<string, ScoreData>();
-  // Sort on time taken to find the top scoring users
-  var daysOne = _.sortBy(_.groupBy(data, "day"), ["timeTakenMsOne"], ["asc"]);
-  var daysTwo = _.sortBy(
-    _.groupBy(
-      data.filter((x) => !!x.starTwo),
-      "day"
-    ),
-    ["timeTakenMsTwo"],
-    ["asc"]
-  );
+  const userIds = Array.from(new Set(data.map((entry) => entry.userId)));
+  const userCount = userIds.length;
 
-  // Map to scores per day per star one
-  var scoresPerDayOne = daysOne.map((day) =>
-    day.map((x, ind) => {
-      return {
-        day: x.day,
-        userid: x.userid,
-        score: day.length - ind,
-        timeTakenMsOne: x.timeTakenMsOne,
-        timeTakenMsTwo: x.timeTakenMsTwo,
-        totalTimeTakenMs: null,
-      } as ScoreDataUserId;
-    })
-  );
-
-  // Map to scores per day per star two
-  var scoresPerDayTwo = daysTwo.map((day) =>
-    day.map((x, ind) => {
-      return {
-        day: x.day,
-        userid: x.userid,
-        score: day.length - ind,
-        timeTakenMsOne: x.timeTakenMsOne,
-        timeTakenMsTwo: x.timeTakenMsTwo,
-        totalTimeTakenMs: null,
-      } as ScoreDataUserId;
-    })
-  );
-
-  // Map the first results (of star one) into the result Dictionary
-  scoresPerDayOne.forEach((day) =>
-    day.forEach((x) => {
-      var entry =
-        result.get(x.userid) ??
-        ({
-          score: 0,
-          timeTakenMsOne: 0,
-          timeTakenMsTwo: 0,
-          totalTimeTakenMs: 0,
-        } as ScoreData);
-      result.set(x.userid, {
-        score: entry.score + x.score,
-        timeTakenMsOne: entry.timeTakenMsOne + x.timeTakenMsOne,
+  // Create output data structure
+  const totals = new Map(
+    userIds.map((userid) => [
+      userid,
+      {
+        score: 0,
+        timeTakenMsOne: 0,
         timeTakenMsTwo: 0,
-        totalTimeTakenMs: entry.totalTimeTakenMs + x.timeTakenMsOne,
-      });
+        totalTimeTakenMs: 0,
+      } as ScoreData,
+    ])
+  );
+
+  // Group by day and sort by time ASC (shortest = best); filter users ineligible for score
+  const partOneSort = Array.from(Array(26)).map((_, day) => {
+    const dayData = data.filter((entry) => entry.day === day);
+    return dayData.sort((a, b) => a.timeTakenMsOne - b.timeTakenMsOne);
+  });
+  const partTwoSort = Array.from(Array(26)).map((_, day) => {
+    const dayData = data.filter(
+      (entry) => entry.day === day && entry.timeTakenMsTwo !== null
+    );
+    return dayData.sort((a, b) => a.timeTakenMsTwo - b.timeTakenMsTwo);
+  });
+
+  // Add time and score in reverse time sort (slowest time is 1pt, 2nd-slowest time is 2pt, etc)
+  partOneSort.forEach((day) =>
+    day.forEach((entry, i) => {
+      const userTotal = totals.get(entry.userId);
+      userTotal.score += userCount - i;
+      userTotal.timeTakenMsOne += entry.timeTakenMsOne;
+    })
+  );
+  partTwoSort.forEach((day) =>
+    day.forEach((entry, i) => {
+      const userTotal = totals.get(entry.userId);
+      userTotal.score += userCount - i;
+      userTotal.timeTakenMsTwo += entry.timeTakenMsTwo ?? 0;
     })
   );
 
-  // Map the second results (of star two) into the result Dictionary
-  scoresPerDayTwo.forEach((day) =>
-    day.forEach((x) => {
-      var entry = result.get(x.userid);
-      result.set(x.userid, {
-        score: x.score + entry.score,
-        timeTakenMsOne: entry.timeTakenMsOne,
-        timeTakenMsTwo: entry.timeTakenMsTwo + x.timeTakenMsTwo,
-        // If star two hasnt been solved, the total time is star one
-        totalTimeTakenMs:
-          x.timeTakenMsTwo > 0
-            ? entry.totalTimeTakenMs + (x.timeTakenMsTwo - x.timeTakenMsOne)
-            : entry.totalTimeTakenMs,
-      });
-    })
-  );
+  // Compute total times per user
+  totals.forEach((userTotal) => {
+    userTotal.totalTimeTakenMs =
+      userTotal.timeTakenMsOne + userTotal.timeTakenMsTwo;
+  });
 
-  return result;
+  return totals;
 };

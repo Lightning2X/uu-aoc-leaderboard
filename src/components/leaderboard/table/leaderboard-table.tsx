@@ -70,7 +70,7 @@ function LeaderBoardTable(props: LeaderBoardTableProps) {
   return (
     <MultiUseTable
       columns={columns}
-      data={userData}
+      data={userData ? userData.sort((a, b) => b.score - a.score) : null}
       isLoading={isLoading}
       isError={isError}
       onRowClick={onRowClick}

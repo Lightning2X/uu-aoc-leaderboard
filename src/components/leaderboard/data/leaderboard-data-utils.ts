@@ -15,8 +15,8 @@ export const mapToUserData = (data: ChallengeData[], year: number) => {
       return { day: x.day, one: !!x.starOne, two: !!x.starTwo } as StarData;
     });
     const row: UserData = {
-      userid: userEntry[0],
-      username: userEntry[1][0].username,
+      userId: userEntry[0],
+      userName: userEntry[1][0].userName,
       stars: _.sortBy(stars, ["day"], ["asc"]),
       score: scoreMap.get(userEntry[0])?.score,
       totalTime: scoreMap.get(userEntry[0])?.totalTimeTakenMs,
@@ -41,14 +41,14 @@ export const mapToChallengeData = (data: ChallengeDTO[]) => {
         const starTwo = x.starTwo ? new Date(x.starTwo) : null;
         return {
           day: x.day,
-          year: x.year,
-          username: x.username,
-          userid: x.userid,
+          userName: x.username,
+          userId: x.userid,
           starOne,
           starTwo,
           startTime,
           timeTakenMsOne: getTimeDifference(startTime, starOne),
           timeTakenMsTwo: getTimeDifference(startTime, starTwo),
+          totalTimeTakenMs: getTimeDifference(startTime, starTwo ?? starOne)
         } as ChallengeData;
       })
   );
