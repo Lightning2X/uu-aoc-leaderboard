@@ -23,5 +23,5 @@ export const msToMin = (ms: number) => {
 };
 
 export const flagDate = (date: Date, year: number) => {
-  return date.getUTCFullYear() > year;
+  return date ? date.getUTCFullYear() > year : false;
 };
