@@ -3,16 +3,11 @@ import { ChallengeDTO } from "shared/types/dto";
 export interface UserData {
   userName: string;
   userId: string;
-  stars: StarData[];
+  totalStars1: number;
+  totalStars2: number;
   totalTime: number;
   score: number;
   flagged: boolean;
-}
-
-export interface StarData {
-  day: number;
-  one: boolean;
-  two: boolean;
 }
 
 export interface LeaderBoardInfoDTO {

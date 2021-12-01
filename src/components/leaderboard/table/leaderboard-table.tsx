@@ -7,8 +7,7 @@ import { useHistory } from "react-router";
 import {
   flagTableFormatter,
   miliSecondTableFormatter,
-  starTableFormatterOne,
-  starTableFormatterTwo,
+  starTableFormatter,
 } from "./leaderboard-table-formatters";
 import styles from "./leaderboard-table.module.scss";
 import { LeaderBoardTableProps } from "./leaderboard-table.types";
@@ -35,18 +34,18 @@ function LeaderBoardTable(props: LeaderBoardTableProps) {
     { id: "userName", label: "Name", minWidth: 100 },
     { id: "score", label: "Score", minWidth: 30 },
     {
-      id: "stars",
+      id: "totalStars1",
       label: getStarLabel("silver"),
       minWidth: 30,
       mobile: false,
-      format: starTableFormatterOne,
+      format: starTableFormatter,
     },
     {
-      id: "stars",
+      id: "totalStars2",
       label: getStarLabel("gold"),
       minWidth: 30,
       mobile: false,
-      format: starTableFormatterTwo,
+      format: starTableFormatter,
     },
     {
       id: "totalTime",
@@ -70,7 +69,7 @@ function LeaderBoardTable(props: LeaderBoardTableProps) {
   return (
     <MultiUseTable
       columns={columns}
-      data={userData ? userData.sort((a, b) => b.score - a.score) : null}
+      data={userData}
       isLoading={isLoading}
       isError={isError}
       onRowClick={onRowClick}

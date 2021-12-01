@@ -2,7 +2,7 @@ import _ from "lodash";
 import { ChallengeDTO } from "shared/types/dto";
 import { flagDate, getTimeDifference } from "shared/utilities";
 import { calculateScores } from "./calculatescores";
-import { UserData, StarData, ChallengeData } from "./leaderboard-data.types";
+import { UserData, ChallengeData } from "./leaderboard-data.types";
 
 export const mapToUserData = (data: ChallengeData[], year: number) => {
   var grouped = _.mapValues(_.groupBy(data, "userId"), (list) =>
@@ -11,13 +11,11 @@ export const mapToUserData = (data: ChallengeData[], year: number) => {
   const scoreMap = calculateScores(data);
   var userDataArray = [] as UserData[];
   Object.entries(grouped).forEach((userEntry) => {
-    const stars = userEntry[1].map((x) => {
-      return { day: x.day, one: !!x.starOne, two: !!x.starTwo } as StarData;
-    });
     const row: UserData = {
       userId: userEntry[0],
       userName: userEntry[1][0].userName,
-      stars: _.sortBy(stars, ["day"], ["asc"]),
+      totalStars1: userEntry[1].length,
+      totalStars2: userEntry[1].filter((x) => !!x.starTwo).length,
       score: scoreMap.get(userEntry[0])?.score,
       totalTime: scoreMap.get(userEntry[0])?.totalTimeTakenMs,
       flagged: userEntry[1].some(

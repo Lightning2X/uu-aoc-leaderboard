@@ -22,7 +22,7 @@ export const leaderBoardDataLocalStore = () => ({
     this.leaderBoardData = leaderBoardData;
   },
   setUserData(userData: UserData[]) {
-    this.userData = userData;
+    this.userData = userData ? userData.sort((a, b) => b.score - a.score) : null;
   },
   async getLeaderBoardData(id: string) {
     this.setIsLoading(true);
