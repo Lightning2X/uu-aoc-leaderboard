@@ -6,8 +6,8 @@ export const calculateScores = (data: ChallengeData[]) => {
 
   // Create output data structure
   const totals = new Map(
-    userIds.map((userid) => [
-      userid,
+    userIds.map((userId) => [
+      userId,
       {
         score: 0,
         timeTakenMsOne: 0,

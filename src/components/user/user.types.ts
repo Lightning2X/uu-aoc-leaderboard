@@ -7,8 +7,8 @@ export interface UserPageContentProps {
   year: number;
 }
 export interface UserInfoDTO {
-  userid: string;
-  username: string;
+  userId: string;
+  userName: string;
   profilePic: string;
   githubPage: string;
   challenges: ChallengeDTO[];

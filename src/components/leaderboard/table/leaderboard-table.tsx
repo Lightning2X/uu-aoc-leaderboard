@@ -28,11 +28,11 @@ function LeaderBoardTable(props: LeaderBoardTableProps) {
   };
 
   const onRowClick = (row: any) => {
-    history.push(`/user/${row.userid}`);
+    history.push(`/user/${row.userId}`);
   };
 
   const standardColumns: Column[] = [
-    { id: "username", label: "Name", minWidth: 100 },
+    { id: "userName", label: "Name", minWidth: 100 },
     { id: "score", label: "Score", minWidth: 30 },
     {
       id: "stars",
