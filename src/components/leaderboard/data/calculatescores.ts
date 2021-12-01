@@ -48,8 +48,11 @@ export const calculateScores = (data: ChallengeData[]) => {
   // Compute total times per user
   totals.forEach((userTotal) => {
     userTotal.totalTimeTakenMs =
-      userTotal.timeTakenMsTwo ?? userTotal.timeTakenMsOne;
+      userTotal.timeTakenMsTwo !== 0
+        ? userTotal.timeTakenMsTwo
+        : userTotal.timeTakenMsOne;
   });
+
 
   return totals;
 };
