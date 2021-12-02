@@ -4,8 +4,11 @@ import React from "react";
 import { AOC_DAYS } from "shared/constants";
 import { formatMiliseconds } from "shared/utilities";
 
+export const userNameTableFormatter = (value: unknown, index: number) => {
+  return <React.Fragment>{(index + 1 + ". " + value) as string}</React.Fragment>;
+};
 export const starTableFormatter = (value: unknown) => {
-  return <React.Fragment>{value as number + "/" + AOC_DAYS}</React.Fragment>;
+  return <React.Fragment>{(value as number) + "/" + AOC_DAYS}</React.Fragment>;
 };
 
 export const miliSecondTableFormatter = (value: unknown) => {

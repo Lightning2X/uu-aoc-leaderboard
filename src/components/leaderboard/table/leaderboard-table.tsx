@@ -8,6 +8,7 @@ import {
   flagTableFormatter,
   miliSecondTableFormatter,
   starTableFormatter,
+  userNameTableFormatter,
 } from "./leaderboard-table-formatters";
 import styles from "./leaderboard-table.module.scss";
 import { LeaderBoardTableProps } from "./leaderboard-table.types";
@@ -31,7 +32,12 @@ function LeaderBoardTable(props: LeaderBoardTableProps) {
   };
 
   const standardColumns: Column[] = [
-    { id: "userName", label: "Name", minWidth: 100 },
+    {
+      id: "userName",
+      label: "Name",
+      minWidth: 100,
+      format: userNameTableFormatter,
+    },
     { id: "score", label: "Score", minWidth: 30 },
     {
       id: "totalStars1",

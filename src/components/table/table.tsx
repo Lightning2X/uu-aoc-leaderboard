@@ -55,7 +55,7 @@ function MultiUseTable(props: MultiUseTableProps) {
   const getRowsJSX = (rows: any[]) => {
     return rows
       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-      .map((row) => {
+      .map((row, ind) => {
         return (
           <TableRow
             className={styles["theme-table-row"]}
@@ -74,7 +74,9 @@ function MultiUseTable(props: MultiUseTableProps) {
                   key={column.id}
                   align={column.align}
                 >
-                  {column.format ? column.format(value) : value}
+                  {column.format
+                    ? column.format(value, page * rowsPerPage + ind)
+                    : value}
                 </TableCell>
               );
             })}
@@ -108,6 +110,7 @@ function MultiUseTable(props: MultiUseTableProps) {
       </TableContainer>
       <TablePagination
         className={styles["theme-rows-per-page-list"]}
+        labelRowsPerPage={"Rows"}
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
         count={data.length}

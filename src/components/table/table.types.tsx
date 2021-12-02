@@ -12,5 +12,5 @@ export interface Column {
   mobile?: boolean;
   minWidth?: number;
   align?: "right";
-  format?: (value: unknown) => JSX.Element;
+  format?: (value: unknown, index?: number) => JSX.Element;
 }
