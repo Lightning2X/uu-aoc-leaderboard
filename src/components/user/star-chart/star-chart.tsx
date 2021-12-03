@@ -35,18 +35,15 @@ function StarChart(props: StarChartProps) {
     const sortedMin = chartData.sort(
       (a, b) => Number(a.star1) - Number(b.star1)
     );
-    const sortedMax = chartData.sort((a, b) =>
-      b.star2
-        ? Number(b.star2) - Number(a.star2)
-        : Number(b.star1) - Number(a.star1)
-    );
+    const last = sortedMin[sortedMin.length - 1];
 
     return {
       minY: Number(sortedMin[0].star1),
-      maxY: Number(sortedMax[0].star2 ?? sortedMax[0].star1),
+      maxY: Number(last.star2 ?? last.star1),
     } as Domain;
   };
   const domain = getDomain(chartData);
+  console.log(domain);
 
   return (
     <LineChart
