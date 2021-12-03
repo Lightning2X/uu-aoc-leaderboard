@@ -25,6 +25,8 @@ function StarChart(props: StarChartProps) {
   };
 
   const chartData = mapToChartData(data);
+  chartData.sort((a, b) => a.day - b.day);
+
   const getDomain = (chartData: ChartData[]) => {
     if (chartData.length < 1) {
       return {
@@ -32,14 +34,24 @@ function StarChart(props: StarChartProps) {
         minY: 0,
       } as Domain;
     }
-    const sortedMin = chartData.sort(
-      (a, b) => Number(a.star1) - Number(b.star1)
-    );
-    const last = sortedMin[sortedMin.length - 1];
+
+    let minY = Number.MAX_VALUE;
+    let maxY = 0;
+    for (let d of chartData) {
+      let star1 = Number(d.star1);
+      let star2 = d.star2 ? Number(d.star2) : star1;
+      if(star1 < minY) {
+        minY = star1;
+      }
+
+      if(star2 > maxY) {
+        maxY = star2;
+      }
+    }
 
     return {
-      minY: Number(sortedMin[0].star1),
-      maxY: Number(last.star2 ?? last.star1),
+      minY: minY,
+      maxY: maxY,
     } as Domain;
   };
   const domain = getDomain(chartData);
