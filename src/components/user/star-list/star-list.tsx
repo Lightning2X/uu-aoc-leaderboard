@@ -24,7 +24,7 @@ function StarList(props: StarListProps) {
           flagDate(new Date(userDay.starTwo), year),
       });
     }
-    
+
     return result;
   };
 
@@ -47,8 +47,12 @@ function StarList(props: StarListProps) {
   };
 
   const getStarList = (data: ChallengeDTO[]) => {
-    return starListData.map((x) => {
-      return x.star1 ? <Star style={{ color: getColor(x) }} /> : <StarBorder />;
+    return starListData.map((x, ind) => {
+      return x.star1 ? (
+        <Star key={ind} style={{ color: getColor(x) }} />
+      ) : (
+        <StarBorder key={ind} />
+      );
     });
   };
 
