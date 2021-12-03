@@ -9,7 +9,7 @@ import {
 } from "recharts";
 import { useMediaQueryContext } from "shared/utilities/useMediaQuery";
 import { mapToChartdata as mapToChartData } from "./star-chart-utils";
-import { StarChartProps } from "./star-chart.types";
+import { ChartData, Domain, StarChartProps } from "./star-chart.types";
 function StarChart(props: StarChartProps) {
   const { data, className } = props;
   const { mobile } = useMediaQueryContext();
@@ -23,12 +23,37 @@ function StarChart(props: StarChartProps) {
     }
     return size;
   };
+
+  const chartData = mapToChartData(data);
+  const getDomain = (chartData: ChartData[]) => {
+    if (chartData.length < 1) {
+      return {
+        maxY: 1,
+        minY: 0,
+      } as Domain;
+    }
+    const sortedMin = chartData.sort(
+      (a, b) => Number(a.star1) - Number(b.star1)
+    );
+    const sortedMax = chartData.sort((a, b) =>
+      b.star2
+        ? Number(b.star2) - Number(a.star2)
+        : Number(b.star1) - Number(a.star1)
+    );
+
+    return {
+      minY: Number(sortedMin[0].star1),
+      maxY: Number(sortedMax[0].star2 ?? sortedMax[0].star1),
+    } as Domain;
+  };
+  const domain = getDomain(chartData);
+
   return (
     <LineChart
       className={className}
       width={getSize(DESKTOP_WIDTH)}
       height={getSize(DESKTOP_HEIGHT)}
-      data={mapToChartData(data)}
+      data={chartData}
       margin={{
         top: 5,
         right: 0,
@@ -38,7 +63,7 @@ function StarChart(props: StarChartProps) {
     >
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="day" />
-      <YAxis name="minutes" />
+      <YAxis name="minutes" domain={[domain.minY, domain.maxY]} />
       <Tooltip />
       <Legend />
       <Line

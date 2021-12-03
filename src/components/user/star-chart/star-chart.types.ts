@@ -10,3 +10,8 @@ export interface ChartData {
   star2: string;
   day: number;
 }
+
+export interface Domain {
+  minY: number;
+  maxY: number;
+}
