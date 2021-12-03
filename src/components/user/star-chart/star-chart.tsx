@@ -35,16 +35,16 @@ function StarChart(props: StarChartProps) {
       } as Domain;
     }
 
-    let minY = Number.MAX_VALUE;
+    let minY = Number.MAX_SAFE_INTEGER;
     let maxY = 0;
     for (let d of chartData) {
       let star1 = Number(d.star1);
       let star2 = d.star2 ? Number(d.star2) : star1;
-      if(star1 < minY) {
+      if (star1 < minY) {
         minY = star1;
       }
 
-      if(star2 > maxY) {
+      if (star2 > maxY) {
         maxY = star2;
       }
     }
